@@ -132,3 +132,5 @@ dist
 # IDE
 *.sublime-project
 *.sublime-workspace
+
+public/
