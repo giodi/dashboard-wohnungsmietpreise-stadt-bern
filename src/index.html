@@ -1,11 +1,109 @@
-<!DOCTYPE html>
-<html lang="de">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Dashboard Wohnungsmietpreise in der Stadt Bern</title>
-</head>
-<body>
-	<h1>Preisentwicklung über die Jahre</h1>
-</body>
-</html>
+---
+layout: base.njk
+---
+<header>
+	<h1>Wohnungsmietpreise in der Stadt Bern</h1>
+</header>
+<main>
+	<section>
+		<header>
+			<h2>Preisentwicklung über die Jahre</h2>
+		</header>
+		<div class="flex">
+			<article class="t1 brdri">
+					<h3>Stadtteil</h3>
+					<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
+				<div class="filter">
+					<select>
+						<option>Alle Wohnungsgrössen</option>
+						{% for groesse in filter.wohnungsgroessen %}
+					    <option>{{ groesse }}</option>
+					    {% endfor %}
+					</select>
+				</div>
+				<div class="legend">
+					<h4>Stadtteile</h4>
+					<ul>
+						{% for stadtteil in filter.stadtteile %}
+						<li><label><input type="checkbox" checked>&nbsp;{{ stadtteil }}</label></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="dia" id="chart"></div>
+			</article>
+			<article class="t1">
+				<h3>Wohnungsgrösse</h3>
+				<div class="filter">
+					<select>
+						<option>Alle Stadtteile</option>
+						{% for stadtteil in filter.stadtteile %}
+					    <option>{{ stadtteil }}</option>
+					    {% endfor %}
+					</select>
+				</div>
+				<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse.</p>
+				<div class="legend">
+					<h4>Stadtteile</h4>
+					<ul>
+						{% for groesse in filter.wohnungsgroessen %}
+						<li><label><input type="checkbox" checked>&nbsp;{{ groesse }}</label></li>
+						{% endfor %}
+					</ul>
+				</div>
+				<div class="dia" id="main"></div>
+			</article>
+		</div>
+	</section>
+	<section>
+		<header>
+			<h2>Jahresübersicht</h2>
+		</header>
+		<div class="w100">
+			<div class="w50 brdri">
+				<article>
+					<hgroup>
+						<h3>Unterschiede nach Stadtteilen</h3>
+						<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
+					</hgroup>
+				</article>
+			</div>
+			<div class="w50 flex">
+				<article class="w50">
+					<hgroup>
+						<h3>Wohnungsmietpreis</h3>
+						<p>Wohnungsmietpreise nach Wohnungsgrösse.</p>
+					</hgroup>
+					<div class="dia" id="whg"></div>
+				</article>
+				<article class="w50">
+					<hgroup>
+						<h3>Wohnungsmietpreis</h3>
+						<p>Preis pro Zimmer nach Wohnungsgrösse.</p>
+					</hgroup>
+				</article>
+			</div>
+		</div>
+	</section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+<script type="text/javascript">
+	const options = {
+		chart: {
+			type: 'line',
+			toolar: {
+				show: false
+			}
+		},
+		series: [{
+			name: 'sales',
+			data: [30,40,35,50,49,60,70,91,125]
+		}],
+		xaxis: {
+			categories: [1991,1992,1993,1994,1995,1996,1997, 1998,1999]
+		}
+	}
+
+	const chart = new ApexCharts(document.querySelector("#chart"), options);
+	chart.render();
+
+</script>

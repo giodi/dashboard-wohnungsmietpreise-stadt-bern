@@ -1,0 +1,182 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+	box-sizing: border-box;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+p{
+	line-height: 1.2;
+}
+
+/* Dash Styles */
+:root{
+	--ff-main: 'Inter', Helvetica, Arial, Verdana, sans-serif;
+	--bg1: #fff;
+	--bg2: #FFF5F0;
+	--grey1: #757575;
+	--grey2: #575757;
+	--default-border-rad: 0.9375rem;
+}
+
+body{
+	background: var(--bg1);
+	padding: 1.6875em;
+	font-family: var(--ff-main);
+}
+
+/* Entwicklung Wohnungsmietpreise nach Stadtteil */
+.shdw{
+	
+}
+
+h1{
+	font: 700 2.125em 'Inter', sans-serif;
+}
+
+h2{
+	font: 500 1.375em 'Inter', sans-serif;
+}
+
+h3{
+	font: 700 1.125em 'Inter', sans-serif;
+}
+
+h4{
+	font: 500 .875em 'Inter', sans-serif;
+	color: var(--grey2);
+}
+
+hgroup>p{
+	font-weight: 500;
+	font-size: .875em;
+	color: var(--grey2);
+	margin-top: 1em;
+}
+
+main{
+	background: var(--bg2);
+	border-radius: var(--default-border-rad);
+	padding: 0 1em 1em;
+	margin-top: 1em;
+}
+
+section>div{
+	margin: 1em 0 0 0;
+	padding: 1.125em 1.7em;
+	display: flex;
+	flex-wrap: wrap;
+	background: var(--bg1);
+	border-radius: var(--default-border-rad);
+	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+section>header{
+	margin-top: 1em;
+	padding: 0 1.7em;
+	width: 100%;
+}
+
+.w50{
+	width: 50%;
+}
+
+.flex{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+article{
+	display: grid;
+}
+
+article.t1{
+	width: 50%;
+	display: grid;
+	grid-template-columns: 25% 75%;
+	grid-template-rows: auto;
+	grid-template-areas: 
+    "title filter"
+    "lead dia"
+    "legend dia";
+}
+
+.brdri{
+	padding-right: 1em;
+	border-right: 1px solid var(--grey1);
+}
+
+.brdri + :is(div, article){
+	padding-left: 1em;
+}
+
+
+article.t1>h3{
+	grid-area: title;
+}
+
+article.t1>p.lead{
+	grid-area: lead;
+}
+
+article.t1>div.legend{
+	grid-area: legend;
+	align-self: end;
+}
+
+article.t1>div.filter{
+	grid-area: filter;
+	justify-self: end;
+}
+
+article.t1>div.dia{
+	height: 300px;
+	grid-area: dia;
+}
+
+
+

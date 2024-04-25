@@ -1,0 +1,4 @@
+{
+	"stadtteile" : ["Breitenrain", "Bümpliz", "Innere Stadt", "Kirchenfeld", "Länggasse", "Mattenhof"],
+	"wohnungsgroessen" : ["1 Zimmer", "2 Zimmer", "3 Zimmer", "4 Zimmer", "5 Zimmer"]
+}
