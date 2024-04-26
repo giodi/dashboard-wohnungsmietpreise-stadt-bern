@@ -1,61 +1,793 @@
 {
-    "2023":
-{
-"Innere Stadt": {
-    "Total": 1490,
-    "1 Zimmer": 963,
-    "2 Zimmer": 1328,
-    "3 Zimmer": 1703,
-    "4 Zimmer": 2178,
-    "5 Zimmer": 2766
-  },
-  "Länggasse-Felsenau": {
-    "Total": 1329,
-    "1 Zimmer": 758,
-    "2 Zimmer": 1134,
-    "3 Zimmer": 1355,
-    "4 Zimmer": 1779,
-    "5 Zimmer": 2115
-  },
-  "Mattenhof-Weissenbühl": {
-    "Total": 1278,
-    "1 Zimmer": 780,
-    "2 Zimmer": 1069,
-    "3 Zimmer": 1334,
-    "4 Zimmer": 1675,
-    "5 Zimmer": 1908
-  },
-  "Kirchenfeld-Schosshalde": {
-    "Total": 1453,
-    "1 Zimmer": 736,
-    "2 Zimmer": 1143,
-    "3 Zimmer": 1327,
-    "4 Zimmer": 1726,
-    "5 Zimmer": 2249
-  },
-  "Breitenrain-Lorraine": {
-    "Total": 1300,
-    "1 Zimmer": 764,
-    "2 Zimmer": 1081,
-    "3 Zimmer": 1353,
-    "4 Zimmer": 1730,
-    "5 Zimmer": 2168
-  },
-  "Bümpliz-Oberbottigen": {
-    "Total": 1104,
-    "1 Zimmer": 726,
-    "2 Zimmer": 913,
-    "3 Zimmer": 1055,
-    "4 Zimmer": 1293,
-    "5 Zimmer": 1654
-  },
-  "Stadt Bern": {
-    "Total": 1289,
-    "1 Zimmer": 773,
-    "2 Zimmer": 1081,
-    "3 Zimmer": 1279,
-    "4 Zimmer": 1609,
-    "5 Zimmer": 2044
-  }
-}
+    "2010": {
+        "Innere Stadt": {
+            "1 Zimmer": 783,
+            "2 Zimmer": 1178,
+            "3 Zimmer": 1557,
+            "4 Zimmer": 1923,
+            "5 Zimmer": 2734
+          },
+          "Länggasse-Felsenau": {
+            "1 Zimmer": 649,
+            "2 Zimmer": 925,
+            "3 Zimmer": 1229,
+            "4 Zimmer": 1648,
+            "5 Zimmer": 1861
+          },
+          "Mattenhof-Weissenbühl": {
+            "1 Zimmer": 646,
+            "2 Zimmer": 934,
+            "3 Zimmer": 1209,
+            "4 Zimmer": 1507,
+            "5 Zimmer": 1818
+          },
+          "Kirchenfeld-Schosshalde": {
+            "1 Zimmer": 643,
+            "2 Zimmer": 1018,
+            "3 Zimmer": 1167,
+            "4 Zimmer": 1602,
+            "5 Zimmer": 2051
+          },
+          "Breitenrain-Lorraine": {
+            "1 Zimmer": 634,
+            "2 Zimmer": 909,
+            "3 Zimmer": 1204,
+            "4 Zimmer": 1589,
+            "5 Zimmer": 1972
+          },
+          "Bümpliz-Oberbottigen": {
+            "1 Zimmer": 648,
+            "2 Zimmer": 849,
+            "3 Zimmer": 932,
+            "4 Zimmer": 1147,
+            "5 Zimmer": 1558
+          },
+          "Stadt Bern": {
+            "1 Zimmer": 654,
+            "2 Zimmer": 941,
+            "3 Zimmer": 1143,
+            "4 Zimmer": 1465,
+            "5 Zimmer": 1886
+          }
+    },
+    "2011": {
+        "Innere Stadt": {
+            "1 Zimmer": 784,
+            "2 Zimmer": 1168,
+            "3 Zimmer": 1531,
+            "4 Zimmer": 1920,
+            "5 Zimmer": 2695
+          },
+          "Länggasse-Felsenau": {
+            "1 Zimmer": 659,
+            "2 Zimmer": 951,
+            "3 Zimmer": 1232,
+            "4 Zimmer": 1626,
+            "5 Zimmer": 1959
+          },
+          "Mattenhof-Weissenbühl": {
+            "1 Zimmer": 657,
+            "2 Zimmer": 931,
+            "3 Zimmer": 1207,
+            "4 Zimmer": 1547,
+            "5 Zimmer": 1838
+          },
+          "Kirchenfeld-Schosshalde": {
+            "1 Zimmer": 650,
+            "2 Zimmer": 1026,
+            "3 Zimmer": 1176,
+            "4 Zimmer": 1606,
+            "5 Zimmer": 2082
+          },
+          "Breitenrain-Lorraine": {
+            "1 Zimmer": 627,
+            "2 Zimmer": 907,
+            "3 Zimmer": 1206,
+            "4 Zimmer": 1581,
+            "5 Zimmer": 1949
+          },
+          "Bümpliz-Oberbottigen": {
+            "1 Zimmer": 651,
+            "2 Zimmer": 837,
+            "3 Zimmer": 940,
+            "4 Zimmer": 1158,
+            "5 Zimmer": 1531
+          },
+          "Stadt Bern": {
+            "1 Zimmer": 659,
+            "2 Zimmer": 942,
+            "3 Zimmer": 1146,
+            "4 Zimmer": 1473,
+            "5 Zimmer": 1901
+          }
+    },
+    "2012": {
+            "Innere Stadt": {
+              "1 Zimmer": 801,
+              "2 Zimmer": 1142,
+              "3 Zimmer": 1533,
+              "4 Zimmer": 1891,
+              "5 Zimmer": 2659
+            },
+            "Länggasse-Felsenau": {
+              "1 Zimmer": 646,
+              "2 Zimmer": 964,
+              "3 Zimmer": 1216,
+              "4 Zimmer": 1630,
+              "5 Zimmer": 1954
+            },
+            "Mattenhof-Weissenbühl": {
+              "1 Zimmer": 659,
+              "2 Zimmer": 933,
+              "3 Zimmer": 1210,
+              "4 Zimmer": 1522,
+              "5 Zimmer": 1794
+            },
+            "Kirchenfeld-Schosshalde": {
+              "1 Zimmer": 656,
+              "2 Zimmer": 1029,
+              "3 Zimmer": 1191,
+              "4 Zimmer": 1610,
+              "5 Zimmer": 2036
+            },
+            "Breitenrain-Lorraine": {
+              "1 Zimmer": 628,
+              "2 Zimmer": 914,
+              "3 Zimmer": 1205,
+              "4 Zimmer": 1589,
+              "5 Zimmer": 1909
+            },
+            "Bümpliz-Oberbottigen": {
+              "1 Zimmer": 642,
+              "2 Zimmer": 822,
+              "3 Zimmer": 912,
+              "4 Zimmer": 1138,
+              "5 Zimmer": 1509
+            },
+            "Stadt Bern": {
+              "1 Zimmer": 658,
+              "2 Zimmer": 942,
+              "3 Zimmer": 1139,
+              "4 Zimmer": 1465,
+              "5 Zimmer": 1866
+            }
+    },
+    "2013": {
+        "Innere Stadt": {
+            "Total": 1323,
+            "1 Zimmer": 809,
+            "2 Zimmer": 1159,
+            "3 Zimmer": 1552,
+            "4 Zimmer": 1938,
+            "5 Zimmer": 2676
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1184,
+            "1 Zimmer": 658,
+            "2 Zimmer": 986,
+            "3 Zimmer": 1214,
+            "4 Zimmer": 1644,
+            "5 Zimmer": 1990
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1158,
+            "1 Zimmer": 658,
+            "2 Zimmer": 932,
+            "3 Zimmer": 1219,
+            "4 Zimmer": 1538,
+            "5 Zimmer": 1858
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1323,
+            "1 Zimmer": 641,
+            "2 Zimmer": 1031,
+            "3 Zimmer": 1219,
+            "4 Zimmer": 1608,
+            "5 Zimmer": 2014
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1154,
+            "1 Zimmer": 643,
+            "2 Zimmer": 929,
+            "3 Zimmer": 1213,
+            "4 Zimmer": 1603,
+            "5 Zimmer": 1908
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 976,
+            "1 Zimmer": 652,
+            "2 Zimmer": 818,
+            "3 Zimmer": 924,
+            "4 Zimmer": 1136,
+            "5 Zimmer": 1495
+          },
+          "Stadt Bern": {
+            "Total": 1155,
+            "1 Zimmer": 663,
+            "2 Zimmer": 949,
+            "3 Zimmer": 1151,
+            "4 Zimmer": 1472,
+            "5 Zimmer": 1874
+          }
+    },
+    "2014": {
+        "Innere Stadt": {
+            "Total": 1337,
+            "1 Zimmer": 835,
+            "2 Zimmer": 1161,
+            "3 Zimmer": 1605,
+            "4 Zimmer": 1911,
+            "5 Zimmer": 2656
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1198,
+            "1 Zimmer": 663,
+            "2 Zimmer": 996,
+            "3 Zimmer": 1238,
+            "4 Zimmer": 1645,
+            "5 Zimmer": 1985
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1167,
+            "1 Zimmer": 656,
+            "2 Zimmer": 938,
+            "3 Zimmer": 1220,
+            "4 Zimmer": 1572,
+            "5 Zimmer": 1841
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1330,
+            "1 Zimmer": 666,
+            "2 Zimmer": 1018,
+            "3 Zimmer": 1236,
+            "4 Zimmer": 1615,
+            "5 Zimmer": 1998
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1157,
+            "1 Zimmer": 658,
+            "2 Zimmer": 969,
+            "3 Zimmer": 1193,
+            "4 Zimmer": 1597,
+            "5 Zimmer": 1907
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1006,
+            "1 Zimmer": 660,
+            "2 Zimmer": 850,
+            "3 Zimmer": 960,
+            "4 Zimmer": 1165,
+            "5 Zimmer": 1500
+          },
+          "Stadt Bern": {
+            "Total": 1168,
+            "1 Zimmer": 673,
+            "2 Zimmer": 964,
+            "3 Zimmer": 1163,
+            "4 Zimmer": 1485,
+            "5 Zimmer": 1864
+          }
+    },
+    "2015": {
+        "Innere Stadt": {
+            "Total": 1342,
+            "1 Zimmer": 842,
+            "2 Zimmer": 1138,
+            "3 Zimmer": 1629,
+            "4 Zimmer": 1981,
+            "5 Zimmer": 2637
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1215,
+            "1 Zimmer": 668,
+            "2 Zimmer": 1024,
+            "3 Zimmer": 1254,
+            "4 Zimmer": 1645,
+            "5 Zimmer": 1985
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1165,
+            "1 Zimmer": 664,
+            "2 Zimmer": 955,
+            "3 Zimmer": 1220,
+            "4 Zimmer": 1529,
+            "5 Zimmer": 1815
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1329,
+            "1 Zimmer": 642,
+            "2 Zimmer": 1024,
+            "3 Zimmer": 1242,
+            "4 Zimmer": 1604,
+            "5 Zimmer": 1987
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1180,
+            "1 Zimmer": 663,
+            "2 Zimmer": 969,
+            "3 Zimmer": 1237,
+            "4 Zimmer": 1609,
+            "5 Zimmer": 1939
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1002,
+            "1 Zimmer": 665,
+            "2 Zimmer": 843,
+            "3 Zimmer": 959,
+            "4 Zimmer": 1150,
+            "5 Zimmer": 1520
+          },
+          "Stadt Bern": {
+            "Total": 1174,
+            "1 Zimmer": 675,
+            "2 Zimmer": 971,
+            "3 Zimmer": 1176,
+            "4 Zimmer": 1474,
+            "5 Zimmer": 1865
+          }
+    },
+    "2016": {
+        "Innere Stadt": {
+            "Total": 1357,
+            "1 Zimmer": 849,
+            "2 Zimmer": 1150,
+            "3 Zimmer": 1638,
+            "4 Zimmer": 2041,
+            "5 Zimmer": 2655
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1217,
+            "1 Zimmer": 674,
+            "2 Zimmer": 1025,
+            "3 Zimmer": 1259,
+            "4 Zimmer": 1632,
+            "5 Zimmer": 1995
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1178,
+            "1 Zimmer": 671,
+            "2 Zimmer": 969,
+            "3 Zimmer": 1235,
+            "4 Zimmer": 1540,
+            "5 Zimmer": 1835
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1350,
+            "1 Zimmer": 660,
+            "2 Zimmer": 1041,
+            "3 Zimmer": 1251,
+            "4 Zimmer": 1616,
+            "5 Zimmer": 2070
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1188,
+            "1 Zimmer": 660,
+            "2 Zimmer": 984,
+            "3 Zimmer": 1239,
+            "4 Zimmer": 1624,
+            "5 Zimmer": 1978
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1016,
+            "1 Zimmer": 672,
+            "2 Zimmer": 861,
+            "3 Zimmer": 969,
+            "4 Zimmer": 1178,
+            "5 Zimmer": 1516
+          },
+          "Stadt Bern": {
+            "Total": 1186,
+            "1 Zimmer": 681,
+            "2 Zimmer": 984,
+            "3 Zimmer": 1184,
+            "4 Zimmer": 1488,
+            "5 Zimmer": 1902
+          }
+    },
+    "2017": {
+        "Innere Stadt": {
+            "Total": 1366,
+            "1 Zimmer": 889,
+            "2 Zimmer": 1147,
+            "3 Zimmer": 1625,
+            "4 Zimmer": 2062,
+            "5 Zimmer": 2710
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1235,
+            "1 Zimmer": 684,
+            "2 Zimmer": 1054,
+            "3 Zimmer": 1276,
+            "4 Zimmer": 1644,
+            "5 Zimmer": 1997
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1192,
+            "1 Zimmer": 682,
+            "2 Zimmer": 972,
+            "3 Zimmer": 1256,
+            "4 Zimmer": 1563,
+            "5 Zimmer": 1815
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1344,
+            "1 Zimmer": 641,
+            "2 Zimmer": 1039,
+            "3 Zimmer": 1248,
+            "4 Zimmer": 1587,
+            "5 Zimmer": 2098
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1193,
+            "1 Zimmer": 664,
+            "2 Zimmer": 981,
+            "3 Zimmer": 1250,
+            "4 Zimmer": 1624,
+            "5 Zimmer": 1962
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1025,
+            "1 Zimmer": 684,
+            "2 Zimmer": 875,
+            "3 Zimmer": 967,
+            "4 Zimmer": 1204,
+            "5 Zimmer": 1526
+          },
+          "Stadt Bern": {
+            "Total": 1193,
+            "1 Zimmer": 689,
+            "2 Zimmer": 990,
+            "3 Zimmer": 1193,
+            "4 Zimmer": 1495,
+            "5 Zimmer": 1906
+          }
+    },
+    "2018": {
+        "Innere Stadt": {
+            "Total": 1360,
+            "1 Zimmer": 933,
+            "2 Zimmer": 1118,
+            "3 Zimmer": 1625,
+            "4 Zimmer": 2052,
+            "5 Zimmer": 2696
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1237,
+            "1 Zimmer": 705,
+            "2 Zimmer": 1057,
+            "3 Zimmer": 1271,
+            "4 Zimmer": 1640,
+            "5 Zimmer": 2022
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1202,
+            "1 Zimmer": 689,
+            "2 Zimmer": 976,
+            "3 Zimmer": 1272,
+            "4 Zimmer": 1565,
+            "5 Zimmer": 1829
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1354,
+            "1 Zimmer": 668,
+            "2 Zimmer": 1063,
+            "3 Zimmer": 1256,
+            "4 Zimmer": 1587,
+            "5 Zimmer": 2097
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1210,
+            "1 Zimmer": 673,
+            "2 Zimmer": 1002,
+            "3 Zimmer": 1250,
+            "4 Zimmer": 1664,
+            "5 Zimmer": 2061
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1032,
+            "1 Zimmer": 689,
+            "2 Zimmer": 862,
+            "3 Zimmer": 986,
+            "4 Zimmer": 1209,
+            "5 Zimmer": 1521
+          },
+          "Stadt Bern": {
+            "Total": 1202,
+            "1 Zimmer": 704,
+            "2 Zimmer": 994,
+            "3 Zimmer": 1202,
+            "4 Zimmer": 1502,
+            "5 Zimmer": 1924
+          }
+    },
+    "2019": {
+        "Innere Stadt": {
+            "Total": 1398,
+            "1 Zimmer": 947,
+            "2 Zimmer": 1164,
+            "3 Zimmer": 1642,
+            "4 Zimmer": 2160,
+            "5 Zimmer": 2633
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1262,
+            "1 Zimmer": 728,
+            "2 Zimmer": 1080,
+            "3 Zimmer": 1288,
+            "4 Zimmer": 1706,
+            "5 Zimmer": 1987
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1220,
+            "1 Zimmer": 703,
+            "2 Zimmer": 995,
+            "3 Zimmer": 1292,
+            "4 Zimmer": 1592,
+            "5 Zimmer": 1830
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1381,
+            "1 Zimmer": 668,
+            "2 Zimmer": 1112,
+            "3 Zimmer": 1268,
+            "4 Zimmer": 1638,
+            "5 Zimmer": 2100
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1223,
+            "1 Zimmer": 688,
+            "2 Zimmer": 1010,
+            "3 Zimmer": 1264,
+            "4 Zimmer": 1681,
+            "5 Zimmer": 2050
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1045,
+            "1 Zimmer": 695,
+            "2 Zimmer": 881,
+            "3 Zimmer": 1002,
+            "4 Zimmer": 1216,
+            "5 Zimmer": 1522
+          },
+          "Stadt Bern": {
+            "Total": 1222,
+            "1 Zimmer": 717,
+            "2 Zimmer": 1018,
+            "3 Zimmer": 1218,
+            "4 Zimmer": 1534,
+            "5 Zimmer": 1919
+          }
+    },
+    "2020": {
+        "Innere Stadt": {
+            "Total": 1441,
+            "1 Zimmer": 945,
+            "2 Zimmer": 1266,
+            "3 Zimmer": 1639,
+            "4 Zimmer": 2195,
+            "5 Zimmer": 2664
+          },
+          "Länggasse-Felsenau": {
+            "Total": 1267,
+            "1 Zimmer": 724,
+            "2 Zimmer": 1077,
+            "3 Zimmer": 1293,
+            "4 Zimmer": 1711,
+            "5 Zimmer": 2060
+          },
+          "Mattenhof-Weissenbühl": {
+            "Total": 1225,
+            "1 Zimmer": 722,
+            "2 Zimmer": 1002,
+            "3 Zimmer": 1283,
+            "4 Zimmer": 1618,
+            "5 Zimmer": 1841
+          },
+          "Kirchenfeld-Schosshalde": {
+            "Total": 1382,
+            "1 Zimmer": 661,
+            "2 Zimmer": 1106,
+            "3 Zimmer": 1267,
+            "4 Zimmer": 1634,
+            "5 Zimmer": 2146
+          },
+          "Breitenrain-Lorraine": {
+            "Total": 1219,
+            "1 Zimmer": 706,
+            "2 Zimmer": 1024,
+            "3 Zimmer": 1259,
+            "4 Zimmer": 1656,
+            "5 Zimmer": 1967
+          },
+          "Bümpliz-Oberbottigen": {
+            "Total": 1043,
+            "1 Zimmer": 695,
+            "2 Zimmer": 877,
+            "3 Zimmer": 1002,
+            "4 Zimmer": 1217,
+            "5 Zimmer": 1500
+          },
+          "Stadt Bern": {
+            "Total": 1225,
+            "1 Zimmer": 724,
+            "2 Zimmer": 1028,
+            "3 Zimmer": 1215,
+            "4 Zimmer": 1536,
+            "5 Zimmer": 1928
+          }
+    },
+    "2021": {
+            "Innere Stadt": {
+              "Total": 1457,
+              "1 Zimmer": 960,
+              "2 Zimmer": 1282,
+              "3 Zimmer": 1665,
+              "4 Zimmer": 2202,
+              "5 Zimmer": 2718
+            },
+            "Länggasse-Felsenau": {
+              "Total": 1280,
+              "1 Zimmer": 725,
+              "2 Zimmer": 1071,
+              "3 Zimmer": 1318,
+              "4 Zimmer": 1731,
+              "5 Zimmer": 2060
+            },
+            "Mattenhof-Weissenbühl": {
+              "Total": 1242,
+              "1 Zimmer": 734,
+              "2 Zimmer": 1025,
+              "3 Zimmer": 1294,
+              "4 Zimmer": 1646,
+              "5 Zimmer": 1853
+            },
+            "Kirchenfeld-Schosshalde": {
+              "Total": 1400,
+              "1 Zimmer": 678,
+              "2 Zimmer": 1122,
+              "3 Zimmer": 1301,
+              "4 Zimmer": 1649,
+              "5 Zimmer": 2121
+            },
+            "Breitenrain-Lorraine": {
+              "Total": 1244,
+              "1 Zimmer": 705,
+              "2 Zimmer": 1038,
+              "3 Zimmer": 1297,
+              "4 Zimmer": 1687,
+              "5 Zimmer": 1984
+            },
+            "Bümpliz-Oberbottigen": {
+              "Total": 1049,
+              "1 Zimmer": 701,
+              "2 Zimmer": 887,
+              "3 Zimmer": 1005,
+              "4 Zimmer": 1221,
+              "5 Zimmer": 1528
+            },
+            "Stadt Bern": {
+              "Total": 1240,
+              "1 Zimmer": 731,
+              "2 Zimmer": 1041,
+              "3 Zimmer": 1236,
+              "4 Zimmer": 1553,
+              "5 Zimmer": 1932
+            }
+    },
+    "2022": {
+        "Innere Stadt": {
+            "Total": 1448,
+            "1 Zimmer": 928,
+            "2 Zimmer": 1274,
+            "3 Zimmer": 1692,
+            "4 Zimmer": 2148,
+            "5 Zimmer": 2656
+        },
+        "Länggasse-Felsenau": {
+            "Total": 1297,
+            "1 Zimmer": 745,
+            "2 Zimmer": 1120,
+            "3 Zimmer": 1311,
+            "4 Zimmer": 1756,
+            "5 Zimmer": 2085
+        },
+        "Mattenhof-Weissenbühl": {
+            "Total": 1244,
+            "1 Zimmer": 741,
+            "2 Zimmer": 1026,
+            "3 Zimmer": 1301,
+            "4 Zimmer": 1659,
+            "5 Zimmer": 1882
+        },
+        "Kirchenfeld-Schosshalde": {
+            "Total": 1414,
+            "1 Zimmer": 681,
+            "2 Zimmer": 1119,
+            "3 Zimmer": 1303,
+            "4 Zimmer": 1693,
+            "5 Zimmer": 2135
+        },
+        "Breitenrain-Lorraine": {
+            "Total": 1266,
+            "1 Zimmer": 733,
+            "2 Zimmer": 1051,
+            "3 Zimmer": 1320,
+            "4 Zimmer": 1696,
+            "5 Zimmer": 2103
+        },
+        "Bümpliz-Oberbottigen": {
+            "Total": 1069,
+            "1 Zimmer": 695,
+            "2 Zimmer": 892,
+            "3 Zimmer": 1025,
+            "4 Zimmer": 1247,
+            "5 Zimmer": 1580
+        },
+        "Stadt Bern": {
+            "Total": 1254,
+            "1 Zimmer": 740,
+            "2 Zimmer": 1051,
+            "3 Zimmer": 1247,
+            "4 Zimmer": 1575,
+            "5 Zimmer": 1971
+        }
+    },
+    "2023": {
+        "Innere Stadt": {
+            "Total": 1490,
+            "1 Zimmer": 963,
+            "2 Zimmer": 1328,
+            "3 Zimmer": 1703,
+            "4 Zimmer": 2178,
+            "5 Zimmer": 2766
+        },
+        "Länggasse-Felsenau": {
+            "Total": 1329,
+            "1 Zimmer": 758,
+            "2 Zimmer": 1134,
+            "3 Zimmer": 1355,
+            "4 Zimmer": 1779,
+            "5 Zimmer": 2115
+        },
+        "Mattenhof-Weissenbühl": {
+            "Total": 1278,
+            "1 Zimmer": 780,
+            "2 Zimmer": 1069,
+            "3 Zimmer": 1334,
+            "4 Zimmer": 1675,
+            "5 Zimmer": 1908
+        },
+        "Kirchenfeld-Schosshalde": {
+            "Total": 1453,
+            "1 Zimmer": 736,
+            "2 Zimmer": 1143,
+            "3 Zimmer": 1327,
+            "4 Zimmer": 1726,
+            "5 Zimmer": 2249
+        },
+        "Breitenrain-Lorraine": {
+            "Total": 1300,
+            "1 Zimmer": 764,
+            "2 Zimmer": 1081,
+            "3 Zimmer": 1353,
+            "4 Zimmer": 1730,
+            "5 Zimmer": 2168
+        },
+        "Bümpliz-Oberbottigen": {
+            "Total": 1104,
+            "1 Zimmer": 726,
+            "2 Zimmer": 913,
+            "3 Zimmer": 1055,
+            "4 Zimmer": 1293,
+            "5 Zimmer": 1654
+        },
+        "Stadt Bern": {
+            "Total": 1289,
+            "1 Zimmer": 773,
+            "2 Zimmer": 1081,
+            "3 Zimmer": 1279,
+            "4 Zimmer": 1609,
+            "5 Zimmer": 2044
+        }
+    }
 }
