@@ -15,7 +15,7 @@ Im vorliegenden Projekt konzentrieren wir uns auf das Zielpublikum Mieterschaft.
 
 ## Verwendete Tools
 
-[csv2json] (https://csvjson.com/csv2json)
+[csv2json](https://csvjson.com/csv2json)
 
 ## Quellen
 [Über die Wohnungsmietpreiserhebung](https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/prd/abteilung-aussenbeziehungen-und-statistik/statistik-stadt-bern/wohnungsmietpreiserhebung)
@@ -24,4 +24,4 @@ Im vorliegenden Projekt konzentrieren wir uns auf das Zielpublikum Mieterschaft.
 
 [Index der Wohnungsmietpreise der Stadt Bern](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/05pre/05pre-xls#mietpreise)
 
-[Überblick Stadtteile der Stadt Bern] (https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/stasta)
+[Überblick Stadtteile der Stadt Bern](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/stasta)
