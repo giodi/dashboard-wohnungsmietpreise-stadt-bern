@@ -21,6 +21,7 @@
     "@11ty/eleventy": "^2.0.1"
   },
   "dependencies": {
-    "clean-css": "^5.3.3"
+    "clean-css": "^5.3.3",
+    "echarts": "^5.5.0"
   }
 }
