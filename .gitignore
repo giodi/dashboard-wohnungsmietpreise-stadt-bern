@@ -132,5 +132,7 @@ dist
 # IDE
 *.sublime-project
 *.sublime-workspace
+*.DS_Store
+src/.DS_Store
 
 public/
