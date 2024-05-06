@@ -6,14 +6,12 @@ layout: base.njk
 	<button popovertarget="impressum">Impressum</button>
 	<div id="impressum" popover="manual">
 		<h2>Impressum</h2>
-
 		<h3>Quellenangaben</h3>
 		<p>Die Daten stammen</p>
-
 		<h3>Autor:innen</h3>
 		<p>Das Dashboard entstand im Rahmen der Module «Data Visualization» und «Dashboard Design» an der FH Graubünden und wurde von <a href="https://lukasstreit.ch">Lukas Streit</a>, <a href="https://ch.linkedin.com/in/martina-stuessi/en">Martina Stüssi</a> und <a href="https://gionathandiani.name">Gionathan Diani</a> entwickelt.</p>
-		<button class="close-btn" popovertarget="impressum" popovertargetaction="hide">
-	    	<span aria-hidden=”true”>❌</span>
+		<button class="close" popovertarget="impressum" popovertargetaction="hide">
+	    	<span aria-hidden=”true”>🗙</span>
 	   		<span class="sr-only">Close</span>
 	  </button>
 	</div>
@@ -22,38 +20,32 @@ layout: base.njk
 	<section>
 		<header>
 			<h2>Preisentwicklung über die Jahre</h2>
+			<label class="toggle">
+				<input type="checkbox" class="switch sr-only">
+				<span class="sr-only">Wechsle zu Anzeigen in </span>
+				<span>%</span><span>CHF</span>
+			</label>
 		</header>
 		<div class="flex">
-			<article class="t1 brdri">
-					<h3>Stadtteil</h3>
-					<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
+			<article class="t1 brdri" id="trend-district">
+				<h3>Stadtteil</h3>
+				<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
 				<div class="filter">
-					<select class="select">
-						<option>Alle Wohnungsgrössen</option>
-						{% for groesse in filter.wohnungsgroessen %}
-					    <option>{{ groesse }}</option>
-					    {% endfor %}
-					</select>
+					{% set options = data_neu.filters.rooms %}
+					{% include "select.njk" %}
 				</div>
 				<div class="legend">
 					<h4>Stadtteile</h4>
-					<ul>
-						{% for stadtteil in filter.stadtteile %}
-						<li><label><input type="checkbox" checked>&nbsp;{{ stadtteil }}</label></li>
-						{% endfor %}
-					</ul>
+					{% set options = data_neu.filters.districts %}
+					{% include "checkboxes.njk" %}
 				</div>
-				<div class="dia" id="chart"></div>
+				<div class="dia"></div>
 			</article>
-			<article class="t1">
+			<article class="t1" id="trend-rooms">
 				<h3>Wohnungsgrösse</h3>
 				<div class="filter">
-					<select>
-						<option>Alle Stadtteile</option>
-						{% for stadtteil in filter.stadtteile %}
-					    <option>{{ stadtteil }}</option>
-					    {% endfor %}
-					</select>
+					{% set options = data_neu.filters.districts %}
+					{% include "select.njk" %}
 				</div>
 				<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse.</p>
 				<div class="legend">
@@ -64,7 +56,7 @@ layout: base.njk
 						{% endfor %}
 					</ul>
 				</div>
-				<div class="dia" id="main"></div>
+				<div class="dia"></div>
 			</article>
 		</div>
 	</section>
@@ -79,6 +71,7 @@ layout: base.njk
 						<h3>Unterschiede nach Stadtteilen</h3>
 						<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
 					</hgroup>
+					{% include "karte.svg" %}
 				</article>
 			</div>
 			<div class="w50 flex">
@@ -94,20 +87,25 @@ layout: base.njk
 						<h3>Wohnungsmietpreis</h3>
 						<p>Preis pro Zimmer nach Wohnungsgrösse.</p>
 					</hgroup>
+					<div class="dia" id="room-price-per-room"></div>
 				</article>
 			</div>
 		</div>
 	</section>
 </main>
+
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script type="text/javascript">
 	
-	// Create the echarts instance
-	var myChart = echarts.init(
-		document.getElementById('whg'), null, {
-			 renderer: 'svg'
+	const baseOptions = {
+		grid: {
+			left: 0,
+			right: 0,
+			top: 0,
+			bottom: 0,
+			containLabel: true
 		}
-	);
+	}
 
 	const option = {
 		grid: {
@@ -165,7 +163,98 @@ layout: base.njk
 	  	]
 	};
 
-	
+	optionLine = {
+	  ...baseOptions,
+	  xAxis: {
+	    type: 'category',
+	    data: [{% for year in data_neu.years %}{{ year.year }},{% endfor %}],
+	    axisLine: {
+	    	onZero: false
+	    }
+	  },
+	  yAxis: {
+	    type: 'value',
+	    axisLine: {
+	      show: true
+	    },
+	    axisLabel: {
+	    	formatter: (val) => {
+	    		if(val > 0){
+	    			return '+'+val;
+	    		}else if(val < 0){
+	    			return '-'+val;
+	    		}
 
-	myChart.setOption(option);
+	    		return val;
+	    	}
+	    },
+	    splitLine: {
+	    	show: false
+	    }
+	  },
+	  series: [
+	  	{% for district in data_neu.years[0].districts %}
+	  	{% set distIter = loop.index0 %}
+	  	{
+	  		name: "{{ data_neu.mapping[distIter].id }}",
+	  		data: [{% for year in data_neu.years %}{{year.districts[distIter].rooms[0]}},{% endfor %}],
+	  		type: 'line',
+	  		lineStyle: {
+	  			width: 4
+	  		}
+	  	},
+	  	{% endfor %}
+	  ]
+	};
+
+	const roomPrice = echarts.init(
+		document.getElementById('whg'), null, {
+			 renderer: 'svg'
+		}
+	);
+
+	const roomPricePerRoom = echarts.init(
+		document.getElementById('room-price-per-room'), null, {
+			 renderer: 'svg'
+		}
+	);
+
+
+	roomPrice.setOption(option);
+	roomPricePerRoom.setOption(option);
+	
+	trendDistrictData = {{ districtTrend | dump | safe }};
+
+	const dashboard = {
+		getValue: (e) => {
+			return e.target.value;
+		},
+		trendRooms: _ => {
+			const trendRooms = document.getElementById('trend-rooms');
+			const chart = trendRooms.getElementsByClassName('dia')[0];
+			const select = trendRooms.getElementsByTagName('select')[0];
+			const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
+			trendRoomsEChart.setOption(optionLine);
+		},
+		trendDistrict: _ => {
+
+			const trendDistrict = document.getElementById('trend-district');
+			const chart = trendDistrict.getElementsByClassName('dia')[0];
+			const select = trendDistrict.getElementsByTagName('select')[0];
+			const trendDistrictEChart = echarts.init(chart, null, {renderer: 'svg'});
+			trendDistrictEChart.setOption(optionLine);
+
+			select.addEventListener('change', (e) => {
+				trendDistrictEChart.setOption({series: trendDistrictData[e.target.value]});
+			})
+
+		},
+		init: _ => {
+			dashboard.trendDistrict();
+			dashboard.trendRooms();
+		}
+	}
+
+	dashboard.init();
+
 </script>

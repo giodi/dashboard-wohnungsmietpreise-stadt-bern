@@ -1,0 +1,5 @@
+<select class="select">
+	{% for option in options %}
+    <option value="{{ loop.index0 }}">{{ option }}</option>
+    {% endfor %}
+</select>

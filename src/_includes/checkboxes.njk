@@ -1,0 +1,9 @@
+<ul>
+	{% for option in options %}
+	<li>
+		<label>
+			<input type="checkbox" value="{{ loop.index0 }}" checked>&nbsp;{{ option }}
+		</label>
+	</li>
+	{% endfor %}
+</ul>

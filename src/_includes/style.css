@@ -3,19 +3,11 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, abbr, acronym,
+del, dfn, em, img, kbd, small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li, label, caption,
+article, aside, details, figure, figcaption, footer, header, hgroup, 
+menu, nav, output, section, summary, time, mark {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -53,12 +45,11 @@ p{
 }
 
 select {
-  // A reset of styles, including removing the default dropdown arrow
-  appearance: none;
-  // Additional resets for further consistency
-  background-color: transparent;
-  border: none;
-  padding: 0 1em 0 0;
+  /*appearance: none;*/
+  background-color: var(--fschema-el-2);
+  border: 1px solid var(--fschema-el-2);
+  border-radius: 3px;
+  padding: .5em 1em;
   margin: 0;
   width: 100%;
   font-family: inherit;
@@ -67,6 +58,10 @@ select {
   line-height: inherit;
 }
 
+input[type=checkbox]{
+}
+
+/*
 .select {
   width: 100%;
   min-width: 15ch;
@@ -80,6 +75,7 @@ select {
   background-color: #fff;
   background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
 }
+*/
 
 /* Dash Styles */
 :root{
@@ -88,18 +84,31 @@ select {
 	--bg2: #FFF5F0;
 	--grey1: #757575;
 	--grey2: #575757;
+	--text-clr: #000;
+	--fschema-el-0: #fff;
+	--fschema-el-1: #FFF5F0;
+	--fschema-el-2: #FEE0D2;
+	--fschema-el-3: #FCBBA1;
+	--fschema-el-4: #FC9272;
 	--default-border-rad: 0.9375rem;
 }
 
 body{
-	background: var(--bg1);
+	background: var(--fschema-el-0);
 	padding: 1.6875em;
 	font-family: var(--ff-main);
 }
 
-/* Entwicklung Wohnungsmietpreise nach Stadtteil */
-.shdw{
-	
+a{
+	color: var(--text-clr);
+}
+
+p{
+	line-height: 1.5;
+}
+
+p + h3{
+	margin-top: 1em;
 }
 
 h1{
@@ -127,7 +136,7 @@ hgroup>p{
 }
 
 main{
-	background: var(--bg2);
+	background: var(--fschema-el-1);
 	border-radius: var(--default-border-rad);
 	padding: 0 1em 1em;
 	margin-top: 1em;
@@ -138,15 +147,21 @@ section>div{
 	padding: 1.125em 1.7em;
 	display: flex;
 	flex-wrap: wrap;
-	background: var(--bg1);
+	background: var(--fschema-el-0);
 	border-radius: var(--default-border-rad);
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
 }
 
+body>header{
+	display: flex;
+	justify-content: space-between;
+}
+
 section>header{
 	margin-top: 1em;
-	padding: 0 1.7em;
+	padding: 1em 1.7em;
 	width: 100%;
+	display: flex;
 }
 
 .w50{
@@ -172,6 +187,15 @@ article.t1{
     "title filter"
     "lead dia"
     "legend dia";
+}
+
+.sr-only{
+  position: absolute;
+  left:     -10000px;
+  top:      auto;
+  width:    1px;
+  height:   1px;
+  overflow: hidden;
 }
 
 .brdri{
@@ -208,6 +232,7 @@ article.t1>div.dia{
 }
 
 #whg{width: 100%; height: 150px; margin-top: 52px}
+#line{width: 100%; height: 500px;}
 
 
 [popover] {
@@ -215,10 +240,64 @@ article.t1>div.dia{
   padding: 1rem 1.5rem;
   border-radius: var(--default-border-rad);
   box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-  max-width: 20ch;
+  width: 100%;
+  max-width: 30em;
   top: 2rem;
   margin: 0 auto;
-  min-width: 320px;
+
 }
+
+button{
+	background: var(--fschema-el-2);
+	border: 1px solid var(--fschema-el-2);
+	color: #000;
+	padding: 1em;
+	border-radius: 3px;
+	font-weight: 600;
+}
+
+button.close{
+	position: absolute;
+	top: .5em;
+	right: .5em;
+	width: 2em;
+	height: 2em;
+	padding: 0;
+	border-radius: 50%;
+}
+
+button:hover,
+button:focus{
+	background-color: var(--fschema-el-1);
+	cursor: pointer;
+}
+
+label.toggle{
+	margin-left: 1em;
+	display: inline-block;
+	border-radius: var(--default-border-rad);
+	overflow: hidden;
+}
+
+input[type=checkbox] ~ span{
+	display: inline-block;
+	background: #FEE0D2;
+	padding: .5em 0;
+	width: 3em;
+	text-align: center;
+}
+
+input[type=checkbox]:checked + span:first-child{
+	background: blue;
+}
+
+input[type=checkbox]:checked + span:last-child{
+	background: #FCBBA1;
+}
+
+
+
+
+
 
 
