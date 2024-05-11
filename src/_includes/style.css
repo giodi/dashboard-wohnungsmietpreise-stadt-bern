@@ -275,25 +275,49 @@ button:focus{
 label.toggle{
 	margin-left: 1em;
 	display: inline-block;
-	border-radius: var(--default-border-rad);
+	border-radius: .3125em;
 	overflow: hidden;
 }
 
-input[type=checkbox] ~ span{
+label.toggle input[type=checkbox] ~ span{
 	display: inline-block;
-	background: #FEE0D2;
+	background: #FCBBA1;
 	padding: .5em 0;
 	width: 3em;
 	text-align: center;
 }
 
-input[type=checkbox]:checked + span:first-child{
-	background: blue;
+label.toggle input[type=checkbox] ~ .option:last-child{
+	background: #FEE0D2;
 }
 
-input[type=checkbox]:checked + span:last-child{
+label.toggle input[type=checkbox]:checked ~ .option{
+	background:#FEE0D2;
+}
+
+label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	background: #FCBBA1;
 }
+
+.legend label{
+	display: inline-flex;
+	align-items: center;
+	line-height: 1.2;
+}
+
+.legend svg{
+	width: 1em;
+	min-width: 1em;
+	margin-right: .3em;
+}
+
+.legend input[type="checkbox"]:checked + svg rect{
+	fill: #fafafa;
+	opacity: .5;
+}
+
+
+
 
 
 

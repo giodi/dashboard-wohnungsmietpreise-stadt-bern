@@ -1,18 +1,42 @@
-const data = require("./data_neu.json");
+const data = require("./data_absolut.json");
+const themes = require("./colors.json");
 
 module.exports = async function () {
 
-  let series = [];
+  const districts = data.filters.districts.slice(1);
 
-  Object.entries(data.filters.rooms).forEach(([kR, r]) => {
+  let districtTrendData = {
+    colors: themes.divergent,
+    filters: {
+      rooms: data.filters.rooms,
+      districts: districts
+    }
+  }
+
+  let series = [];
+  let series_percent = []
+
+  for(i=0; i < data.filters.rooms.length; i++){
 
     let roomSeries = [];
-
-    Object.entries(data.years[0].districts).forEach(([kD, d]) => {
-
+    let roomSeries_perc = [];
+    
+    for(j=1; j <= districts.length; j++){
+      
       let dist = {
-        name: data.filters.districts[kD],
+        name: data.filters.districts[j],
         type: 'line',
+        animation: false,
+        lineStyle: {
+          width: 4
+        },
+        data: []
+      };
+
+      let dist_perc = {
+        name: data.filters.districts[j],
+        type: 'line',
+        animation: false,
         lineStyle: {
           width: 4
         },
@@ -20,16 +44,26 @@ module.exports = async function () {
       };
 
       data.years.forEach((d) => {
-        dist.data.push(d.districts[kD].rooms[kR]);
+        dist.data.push(d.districts[j].rooms[i]);
       });
 
-      roomSeries.push(dist)
+      for(y = 0; y < data.years.length; y++){
+        dist.data.push(data.years[y].districts[j].rooms[i]);
+        dist_perc.data.push(((100 / data.years[0].districts[j].rooms[i]) * data.years[y].districts[j].rooms[i] - 100).toFixed(2))
+      }
 
-    });
+      roomSeries.push(dist);
+      roomSeries_perc.push(dist_perc);
+      
+    }
 
     series.push(roomSeries);
+    series_percent.push(roomSeries_perc);
+  
+  }
 
-  });
+  districtTrendData.series = series;
+  districtTrendData.series_percent = series_percent;
 
-  return series;
+  return districtTrendData;
 };

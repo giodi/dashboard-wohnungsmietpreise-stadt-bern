@@ -1,0 +1,6 @@
+{
+	"divergent": ["#5D99C1","#91A3AC", "#B3EEA4", "#C9DA10", "#59A854", "#F3B8B7"],
+	"continuous": ["#FCBBA1", "#FC9272", "#EF3B2C", "#CB181D", "#99000D"],
+	"bar" : "#CB181D"
+}
+
