@@ -21,7 +21,7 @@ layout: base.njk
 		<header>
 			<h2>Preisentwicklung über die Jahre</h2>
 			<label class="toggle">
-				<input type="checkbox" class="switch sr-only">
+				<input type="checkbox" id="toggle" class="switch sr-only">
 				<span class="sr-only">Wechsle zwische Anzeige in</span>
 				<span class="option">%</span><span class="sr-only">/</span><span class="option">CHF</span>
 			</label>
@@ -32,6 +32,7 @@ layout: base.njk
 				<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
 				<div class="filter">
 					{% set options = districtTrend.filters.rooms %}
+					{% set id = "district-trend-rooms" %}
 					{% include "select.njk" %}
 				</div>
 				<div class="legend">
@@ -46,6 +47,7 @@ layout: base.njk
 				<h3>Wohnungsgrösse</h3>
 				<div class="filter">
 					{% set options = roomTrend.filters.districts %}
+					{% set id = "rooms-trend-district" %}
 					{% include "select.njk" %}
 				</div>
 				<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse.</p>
@@ -62,6 +64,11 @@ layout: base.njk
 	<section>
 		<header>
 			<h2>Jahresübersicht</h2>
+			<select id="details_years">
+				{% for year in data_absolut.years %}
+				<option value="{{loop.index0}}" {% if loop.index == loop.length %}checked{% endif %}>{{ year.year }}</option>
+				{% endfor %}
+			</select>
 		</header>
 		<div class="w100">
 			<div class="w50 brdri">
@@ -73,18 +80,21 @@ layout: base.njk
 					{% include "karte.svg" %}
 				</article>
 			</div>
-			<div class="w50 flex">
+			<div class="w50 flex" id="room-price">
 				<article class="w50">
 					<hgroup>
 						<h3>Wohnungsmietpreis</h3>
 						<p>Wohnungsmietpreise nach Wohnungsgrösse.</p>
 					</hgroup>
-					<div class="dia" id="whg"></div>
+					<div class="dia"></div>
 				</article>
 				<article class="w50">
-					<hgroup>
-						<h3>Wohnungsmietpreis</h3>
+					<hgroup id="roompricefilter">
+						<h3>Zimmerpreis</h3>
 						<p>Preis pro Zimmer nach Wohnungsgrösse.</p>
+						{% set options = roomPrice.filters.districts %}
+						{% set id = "roomprice" %}
+						{% include "select.njk" %}
 					</hgroup>
 					<div class="dia" id="room-price-per-room"></div>
 				</article>
@@ -94,202 +104,5 @@ layout: base.njk
 </main>
 <script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
 <script type="text/javascript">
-	
-	const baseOptions = {
-		grid: {
-			left: 0,
-			right: 0,
-			top: 0,
-			bottom: 0,
-			containLabel: true,
-		},
-		tooltip: {
-			show: true,
-			trigger: 'item',
-			backgroundColor: "#575757",
-			borderColor: "#575757",
-			textStyle: {
-				color: '#fff'
-			},
-			axisPointer: {
-				type: 'cross',
-				snap: true
-			}
-		}
-	}
-
-	const barOptions = {
-		...baseOptions,
-		color: ['#CB181D'],
-		xAxis: {
-			zlevel: 99,
-			show: false,
-	    	type: 'value',
-		    axisTick: {
-		      show: false
-		    },
-		    splitLine: {
-		      show: false
-		    },
-		    axisLine: {
-	      		show: false
-	    	},
-	  	},
-	  	yAxis: {
-	  		zlevel: 1,
-	    	type: 'category',
-	    	data: ['1 Zi', '2 Zi', '3 Zi', '4 Zi', '5 Zi'],
-	    	splitLine: {
-	      		show: false
-	    	},
-	    	axisLine: {
-	      		show: false
-	    	},
-	    	axisTick: {
-	      		show: false
-	    	},
-	    	axisLabel: {
-	    		inside: true,
-	    		color: '#fff',
-	    		fontWeight: '700'
-	    	}
-	  	},
-	  	series: [
-		  	{
-		    	type: 'bar',
-		    	animation: false,
-		    	data: [{% for val in test %}{{ val }},{% endfor %}],
-		    	label: {
-		    		show: true,
-		    		fontWeight: '700',
-		    		position: 'right',
-		    		color: '#000'
-		    	}
-		    }
-	  	]
-	};
-
-	const axisOptions = {
-		axisLine: {
-	      show: true,
-	      lineStyle: {
-	      	color: '#575757'
-	      },
-	    },
-	    axisLabel: {
-	    	fontSize: 14, 
-	    	fontFamily: 'Inter, sans-serif',
-	    },
-	}
-
-	optionDistrictTrend = {
-	  ...baseOptions,
-	  color: {{ districtTrend.colors | dump | safe }},
-	  xAxis: {
-	    type: 'category',
-	    data: [{% for year in data_absolut.years %}{{ year.year }},{% endfor %}],
-	  	...axisOptions,
-	  	axisTick: {
-	  		alignWithLabel: true,
-	  	}
-	  },
-	  yAxis: {
-	  	...axisOptions,
-	    type: 'value',
-	    scale: true,
-	    axisTick: {
-	    	show: true,
-	    	alignWithLabel: true,
-	    },
-	    splitLine: {
-	    	show: false
-	    }
-	  },
-	  series: {{ districtTrend.series_percent[0] | dump | safe }}
-	};
-
-	optionRoomTrend = {
-	  ...baseOptions,
-	  color: {{ roomTrend.colors | dump | safe }},
-	  xAxis: {
-	    type: 'category',
-	    data: [{% for year in data_absolut.years %}{{ year.year }},{% endfor %}],
-	  },
-	  yAxis: {
-	    type: 'value',
-	    scale: true,
-	    axisTick: {
-	    	show: true,
-	    },
-	    axisLine: {
-	      show: true,
-	    },
-	    splitLine: {
-	    	show: false
-	    }
-	  },
-	  series: {{ roomTrend.series_percent[0] | dump | safe }}
-	};
-
-	const roomPrice = echarts.init(
-		document.getElementById('whg'), null, {
-			 renderer: 'svg'
-		}
-	);
-
-	const roomPricePerRoom = echarts.init(
-		document.getElementById('room-price-per-room'), null, {
-			 renderer: 'svg'
-		}
-	);
-
-
-	roomPrice.setOption(barOptions);
-	roomPricePerRoom.setOption(barOptions);
-	
-	trendDistrictData = {{ districtTrend.series | dump | safe }};
-	trendDistrictData_percent = {{ districtTrend.series_percent | dump | safe }};
-	trendDist = [trendDistrictData, trendDistrictData_percent]
-	trendRoomData = {{ roomTrend.series | dump | safe }};
-
-	const dashboard = {
-		trendDistrictData: [{{ districtTrend.series | dump | safe }}, {{ districtTrend.series_percent | dump | safe }}],
-		getValue: (e) => {
-			return e.target.value;
-		},
-		toggle: _ => {
-			const toggleBtn = document.querySelector('.switch');
-			toggleBtn.addEventListener('change', (e) => {
-				dashboard.trendDistrictData = e.target.checked ? trendDistrictData_percent :  trendDistrictData;
-			});
-		},
-		trendRooms: _ => {
-			const trendRooms = document.getElementById('trend-rooms');
-			const chart = trendRooms.getElementsByClassName('dia')[0];
-			const select = trendRooms.getElementsByTagName('select')[0];
-			const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
-			trendRoomsEChart.setOption(optionRoomTrend);
-
-			select.addEventListener('change', (e) => {
-				trendRoomsEChart.setOption({series: trendRoomData[e.target.value]});
-			})
-		},
-		trendDistrict: _ => {
-			const trendDistrict = document.getElementById('trend-district');
-			const chart = trendDistrict.getElementsByClassName('dia')[0];
-			const select = trendDistrict.getElementsByTagName('select')[0];
-			const trendDistrictEChart = echarts.init(chart, null, {renderer: 'svg'});
-			trendDistrictEChart.setOption(optionDistrictTrend);
-			select.addEventListener('change', (e) => {
-				trendDistrictEChart.setOption({series: dashboard.trendDistrictData[0][e.target.value]});
-			})
-		},
-		init: _ => {
-			dashboard.trendDistrict();
-			dashboard.trendRooms();
-		}
-	}
-
-	dashboard.init();
-
+{% include "dashboard.js" %}
 </script>

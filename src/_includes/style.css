@@ -7,7 +7,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, abbr, acronym,
 del, dfn, em, img, kbd, small, strike, strong, sub, sup, tt, var,
 b, u, i, center, dl, dt, dd, ol, ul, li, label, caption,
 article, aside, details, figure, figcaption, footer, header, hgroup, 
-menu, nav, output, section, summary, time, mark {
+menu, section{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -20,9 +20,6 @@ menu, nav, output, section, summary, time, mark {
 article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
-}
-body {
-	line-height: 1;
 }
 ol, ul {
 	list-style: none;
@@ -49,33 +46,15 @@ select {
   background-color: var(--fschema-el-2);
   border: 1px solid var(--fschema-el-2);
   border-radius: 3px;
-  padding: .5em 1em;
+  padding: .2em .4em;
   margin: 0;
-  width: 100%;
+  width: auto;
   font-family: inherit;
   font-size: inherit;
+  font-weight: 500;
   cursor: inherit;
   line-height: inherit;
 }
-
-input[type=checkbox]{
-}
-
-/*
-.select {
-  width: 100%;
-  min-width: 15ch;
-  max-width: 30ch;
-  border: 1px solid var(--select-border);
-  border-radius: 0.25em;
-  padding: 0.25em 0.5em;
-  font-size: 1.25rem;
-  cursor: pointer;
-  line-height: 1.1;
-  background-color: #fff;
-  background-image: linear-gradient(to top, #f9f9f9, #fff 33%);
-}
-*/
 
 /* Dash Styles */
 :root{
@@ -95,8 +74,13 @@ input[type=checkbox]{
 
 body{
 	background: var(--fschema-el-0);
-	padding: 1.6875em;
 	font-family: var(--ff-main);
+	line-height: 1;
+	height: 100vh;
+	display: grid;
+	padding: 1em;
+	grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
 }
 
 a{
@@ -128,18 +112,30 @@ h4{
 	color: var(--grey2);
 }
 
-hgroup>p{
-	font-weight: 500;
-	font-size: .875em;
-	color: var(--grey2);
-	margin-top: 1em;
-}
-
 main{
+	display: grid;
 	background: var(--fschema-el-1);
 	border-radius: var(--default-border-rad);
 	padding: 0 1em 1em;
+}
+
+body>header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 var(--default-border-rad) 1em;
+}
+
+section>header{
 	margin-top: 1em;
+	padding: 0 var(--default-border-rad);
+	width: 100%;
+	align-items: center;
+	display: inline-flex;
+}
+
+section>header select{
+	margin-left: 1em;
 }
 
 section>div{
@@ -150,18 +146,6 @@ section>div{
 	background: var(--fschema-el-0);
 	border-radius: var(--default-border-rad);
 	box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.1);
-}
-
-body>header{
-	display: flex;
-	justify-content: space-between;
-}
-
-section>header{
-	margin-top: 1em;
-	padding: 1em 1.7em;
-	width: 100%;
-	display: flex;
 }
 
 .w50{
@@ -181,7 +165,7 @@ article{
 article.t1{
 	width: 50%;
 	display: grid;
-	grid-template-columns: 25% 75%;
+	grid-template-columns: 30% 70%;
 	grid-template-rows: auto;
 	grid-template-areas: 
     "title filter"
@@ -205,6 +189,13 @@ article.t1{
 
 .brdri + :is(div, article){
 	padding-left: 1em;
+}
+
+hgroup>p{
+	font-weight: 500;
+	font-size: .875em;
+	color: var(--grey2);
+	margin-top: 1em;
 }
 
 
@@ -311,9 +302,33 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	margin-right: .3em;
 }
 
+.legend input[type="checkbox"] + svg rect{
+	opacity: .2;
+}
+
 .legend input[type="checkbox"]:checked + svg rect{
-	fill: #fafafa;
-	opacity: .5;
+	opacity: 1;
+}
+
+#roompricefilter{
+	display: grid;
+	grid-template-columns: 50% 50%;
+	grid-template-rows: auto 1fr;
+	grid-template-areas: 
+    "tit fil"
+    "lea lea";
+}
+
+#roompricefilter h3{
+	grid-area: tit;
+}
+
+#roompricefilter select{
+	grid-area: fil;
+}
+
+#roompricefilter p{
+	grid-area: lea;
 }
 
 

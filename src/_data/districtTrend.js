@@ -14,7 +14,7 @@ module.exports = async function () {
   }
 
   let series = [];
-  let series_percent = []
+  let series_percent = [];
 
   for(i=0; i < data.filters.rooms.length; i++){
 
