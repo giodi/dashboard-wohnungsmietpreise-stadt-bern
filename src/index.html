@@ -72,12 +72,12 @@ layout: base.njk
 		</header>
 		<div class="w100">
 			<div class="w50 brdri">
-				<article>
+				<article id="map">
 					<hgroup>
 						<h3>Unterschiede nach Stadtteilen</h3>
 						<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
 					</hgroup>
-					{% include "karte.svg" %}
+					<div id="karte"></div>
 				</article>
 			</div>
 			<div class="w50 flex" id="room-price">

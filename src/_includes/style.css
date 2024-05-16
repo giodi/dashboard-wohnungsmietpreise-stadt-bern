@@ -7,7 +7,7 @@ html, body, div, span, h1, h2, h3, h4, h5, h6, p, a, abbr, acronym,
 del, dfn, em, img, kbd, small, strike, strong, sub, sup, tt, var,
 b, u, i, center, dl, dt, dd, ol, ul, li, label, caption,
 article, aside, details, figure, figcaption, footer, header, hgroup, 
-menu, section{
+menu, main, section{
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -114,6 +114,8 @@ h4{
 
 main{
 	display: grid;
+	grid-template-rows: repeat(2, 50%);
+	row-gap: 1em;
 	background: var(--fschema-el-1);
 	border-radius: var(--default-border-rad);
 	padding: 0 1em 1em;
@@ -124,6 +126,11 @@ body>header{
 	justify-content: space-between;
 	align-items: center;
 	padding: 0 var(--default-border-rad) 1em;
+}
+
+main>section{
+	display: grid;
+	grid-template-rows: auto 1fr;
 }
 
 section>header{
@@ -160,6 +167,11 @@ section>div{
 
 article{
 	display: grid;
+}
+
+#map{
+	height: 100%;
+	grid-template-rows: auto 1fr;
 }
 
 article.t1{

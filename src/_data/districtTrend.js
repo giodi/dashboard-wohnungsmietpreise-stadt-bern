@@ -26,6 +26,14 @@ module.exports = async function () {
       let dist = {
         name: data.filters.districts[j],
         type: 'line',
+        markPoint: {
+          symbol: 'rect',
+          symbolSize: 250,
+
+        },
+        emphasis: {
+          disabled: true,
+        },
         animation: false,
         lineStyle: {
           width: 4
@@ -48,7 +56,6 @@ module.exports = async function () {
       });
 
       for(y = 0; y < data.years.length; y++){
-        dist.data.push(data.years[y].districts[j].rooms[i]);
         dist_perc.data.push(((100 / data.years[0].districts[j].rooms[i]) * data.years[y].districts[j].rooms[i] - 100).toFixed(2))
       }
 

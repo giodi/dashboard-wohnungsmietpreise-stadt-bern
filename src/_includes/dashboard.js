@@ -2,8 +2,52 @@ const data = {
 	trendDistrict: [{{ districtTrend.series_percent | dump | safe }}, {{ districtTrend.series | dump | safe }}],
 }
 
-const baseOptions = {
+echarts.registerMap('stadtteile', { svg: '{% include "karte.svg" %}' });
+const charti = echarts.init(document.getElementById('karte'), null, {renderer: 'svg'});
+charti.setOption({
+	visualMap: {
+      left: 'left',
+      min: 1104,
+      max: 1490,
+      orient: 'horizontal',
+      text: ['1 490', '1 104'],
+      realtime: true,
+      calculable: false,
+      textStyle: {
 
+      },
+      inRange: {
+	    color: ['#FFF5F0', '#FEE0D2', '#FCBBA1', '#FC9272', '#FB6A4A', '#EF3B2C', '#CB181D', '#99000D']
+	  }
+    },
+    series: [{
+            type: 'map',
+            map: 'stadtteile',
+            name: '2023',
+            roam: false,
+            left: 'right',
+            //right: 0,
+            //top: 0,
+            //bottom: 0,
+           	aspectScale: 1,
+            emphasis: {
+                disabled: true,
+            },
+            selectedMode: false,
+            data: [
+                { name: 'Innere Stadt', value: 1490 },
+                { name: 'Kirchenfeld-Schosshalde', value: 1200 },
+                { name: 'Breitenrain-Lorraine', value: 1300 },
+                { name: 'Mattenhof-Weissenbühl', value: 1350 },
+                { name: 'Länggasse-Felsenau', value: 1250 },
+                { name: 'Bümpliz-Oberbottigen', value: 1104 },
+            ]
+        }]
+});
+
+
+const baseOptions = {
+	animation: false,
 	grid: {
 		left: 0,
 		right: 0,
@@ -43,16 +87,37 @@ const baseOptions = {
 	  ...baseOptions,
 	  color: {{ districtTrend.colors | dump | safe }},
 	  xAxis: {
+	  	name: 'Jahr',
+	  	nameLocation: 'end',
+	  	nameGap: 0,
+	  	nameRotate: 0,
+	  	nameTextStyle: {
+	  		align: 'right',
+	  		verticalAlign: 'bottom',
+	  		padding: [0, 0, 10, 0]
+	  	},
 	    type: 'category',
 	    data: [{% for year in data_absolut.years %}{{ year.year }},{% endfor %}],
 	  	...axisOptions,
 	  	onZero: false,
 	  	axisTick: {
 	  		alignWithLabel: true,
-	  	}
+	  	},
+	  	axisLine: {
+	    	onZero: false,
+	    },
 	  },
 	  yAxis: {
 	  	...axisOptions,
+	  	name: 'CHF',
+	  	nameLocation: 'end',
+	  	nameGap: 0,
+	  	nameRotate: 0,
+	  	nameTextStyle: {
+	  		align: 'left',
+	  		verticalAlign: 'top',
+	  		padding: [0, 0, 0, 10]
+	  	},
 	    type: 'value',
 	    scale: true,
 	    axisTick: {
@@ -65,6 +130,8 @@ const baseOptions = {
 	  },
 	  series: data.trendDistrict[0]
 	};
+
+	console.log(data.trendDistrict[1])
 
 	const trendDistrictData = {{ districtTrend.series | dump | safe }};
 	const trendDistrictData_percent = {{ districtTrend.series_percent | dump | safe }};
@@ -105,7 +172,7 @@ const baseOptions = {
 			      show: false
 			    },
 			    axisLine: {
-		      		show: false
+		      		show: false,
 		    	},
 		  	},
 		  	yAxis: {
@@ -176,21 +243,17 @@ const baseOptions = {
 				location.reload();
 			});
 		},
-		setCboxFilters: (chart, cboxes, parEl, seriesData) => {
+		checkboxFilters: (area) => {
 
-			for(let cb of cboxes){
-				cb.addEventListener('click', (e) => {
-					let rooms = document.querySelector('select').value;
-					let active = parEl.querySelectorAll('input[type=checkbox]:checked');
-					let i = active.length;
-					series = [];
-					while(i--){
-						series.push(seriesData[rooms][active[i].value]);
-					}
-					chart.clear();
-					chart.setOption({series: series, notMerge: false, replaceMerge: ['series']});
-				});
+			let active = area.querySelectorAll('input[type=checkbox]');
+			let i = active.length;
+			const selection = {};
+			
+			while(i--){
+				selection[active[i].value] = active[i].checked;
 			}
+
+			return selection;
 
 		},
 		trendRooms: _ => {
@@ -198,40 +261,28 @@ const baseOptions = {
 			const trendRooms = document.getElementById('trend-rooms');
 			const chart = trendRooms.getElementsByClassName('dia')[0];
 			const filters = [dashboard.filters.toggle(), dashboard.filters.trendRoomDistricts]
-			const checkboxes = trendRooms.getElementsByTagName('input');
+			const cboxes = trendRooms.getElementsByTagName('input');
 			const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
 			
 			trendRoomsEChart.setOption(dashboard.optionRoomTrend);
 			trendRoomsEChart.setOption({
 				color: {{ roomTrend.colors | dump | safe }},
-				series: dashboard.data.trendRoom[filters[0]][filters[1].value]
+				series: dashboard.data.trendRoom[filters[0]][filters[1].value],
+				legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
 			});
 
 			filters[1].addEventListener('change', (e) => {
 				trendRoomsEChart.setOption({
-					series: dashboard.data.trendRoom[filters[0]][filters[1].value]
+					series: dashboard.data.trendRoom[filters[0]][filters[1].value],
+					legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
 				});
 			})
 
-
-			/*
-			for(let checkbox of checkboxes){
-				checkbox.addEventListener('click', (e) => {
-					let active = trendRooms.querySelectorAll('input[type=checkbox]:checked');
-					let i = active.length;
-
-					newSeries = [];
-					while(i--){
-						newSeries.push(trendRoomData[1][active[i].value]);
-					}
-
-					console.log(newSeries);
-					
-					trendRoomsEChart.setOption({series: newSeries, notMerge: true});
-				});
-			}*/
-
-			//dashboard.setSelectFilter(trendRoomsEChart, select, trendRoomData)
+			for(cbox of cboxes){
+				cbox.addEventListener('click', (e) => {
+					trendRoomsEChart.setOption({legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)}});
+				})
+			}
 			
 		},
 		trendDistrict: _ => {
@@ -240,20 +291,27 @@ const baseOptions = {
 			const chart = trendDistrict.getElementsByClassName('dia')[0];
 			const cboxes = trendDistrict.querySelectorAll('input[type=checkbox]'); 
 			const trendDistrictEChart = echarts.init(chart, null, {renderer: 'svg'});
-
 			const filters = [dashboard.filters.toggle(), dashboard.filters.trendDistrictRooms]
 
 			trendDistrictEChart.setOption(optionDistrictTrend);
 			trendDistrictEChart.setOption({
 				series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
 				color: {{ districtTrend.colors | dump | safe }},
+				legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
 			});
 
 			filters[1].addEventListener('change', (e) => {
 				trendDistrictEChart.setOption({
-					series: dashboard.data.trendDistrict[filters[0]][filters[1].value]
+					series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
+					legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
 				});
-			})
+			});
+
+			for(cbox of cboxes){
+				cbox.addEventListener('click', (e) => {
+					trendDistrictEChart.setOption({legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)}});
+				})
+			}
 	
 		},
 		roomPrice: _ => {
@@ -276,7 +334,6 @@ const baseOptions = {
 				color: {{ pricePerRoom.colors | dump | safe }},
 				series: pricePerRoom[filters[0].value][filters[1].value],				
 			});
-			
 
 			filters[1].addEventListener('change', (e) => {
 				roomPriceChart.setOption({
