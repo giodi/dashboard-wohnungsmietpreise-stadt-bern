@@ -26,15 +26,10 @@ module.exports = async function () {
       let dist = {
         name: data.filters.districts[j],
         type: 'line',
-        markPoint: {
-          symbol: 'rect',
-          symbolSize: 250,
-
-        },
+        animation: false,
         emphasis: {
           disabled: true,
         },
-        animation: false,
         lineStyle: {
           width: 4
         },
@@ -45,17 +40,19 @@ module.exports = async function () {
         name: data.filters.districts[j],
         type: 'line',
         animation: false,
+        symbol: 'circle',
+        symbolSize: 13,
+        emphasis: {
+          disabled: true,
+        },
         lineStyle: {
           width: 4
         },
         data: []
       };
 
-      data.years.forEach((d) => {
-        dist.data.push(d.districts[j].rooms[i]);
-      });
-
       for(y = 0; y < data.years.length; y++){
+        dist.data.push(data.years[y].districts[j].rooms[i]);
         dist_perc.data.push(((100 / data.years[0].districts[j].rooms[i]) * data.years[y].districts[j].rooms[i] - 100).toFixed(2))
       }
 
