@@ -16,7 +16,7 @@ module.exports = function(eleventyConfig) {
 		htmlTemplateEngine: "njk",
 		dir: {
 			input: "src",
-			output: "public"
+			output: "docs"
 		}
 	}
 
