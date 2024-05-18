@@ -1,10 +1,11 @@
+(()=>{
 const commonChartOptions = {
 	basis: {
 		animation: false,
 		grid: {
 			left: 0,
 			right: 0,
-			top: 5,
+			top: 10,
 			bottom: 0,
 			containLabel: true,
 		},
@@ -53,7 +54,6 @@ const commonChartOptions = {
 		    },
 		},
 		yAxis: {
-		  	name: 'CHF',
 		  	nameLocation: 'end',
 		  	nameGap: 0,
 		  	nameRotate: 0,
@@ -80,6 +80,7 @@ const commonChartOptions = {
 		    axisLabel: {
 		    	fontSize: 14, 
 		    	fontFamily: 'Inter, sans-serif',
+		    	formatter: (val) => {return val.toLocaleString('de-CH')},
 		    },
 		},
 	}
@@ -99,7 +100,7 @@ const dashboard = {
 	filters: {
 		toggle: _ => {return document.getElementById('toggle').checked ? 1 : 0},
 		year: document.getElementById('details_years'),
-		roomPriceDistrict: document.getElementById('roomprice'),
+		roomPriceDistrict: document.getElementById('roompricdistricts'),
 		trendDistrictRooms: document.getElementById('district-trend-rooms'),
 		trendRoomDistricts: document.getElementById('rooms-trend-district'),
 		mapRoom: document.getElementById('map-rooms')
@@ -107,6 +108,9 @@ const dashboard = {
 	options: {
 		bar: {
 			...commonChartOptions.basis,
+			tooltip: {
+				show: false,
+			},
 			color: "{{ roomPrice.colors }}",
 			legendHoverLink: false,
 			xAxis: {
@@ -139,7 +143,7 @@ const dashboard = {
 		    	axisLabel: {
 		    		inside: true,
 		    		color: '#fff',
-		    		fontWeight: '700'
+		    		fontWeight: '700',
 		    	}
 		  	},
 		},
@@ -153,12 +157,6 @@ const dashboard = {
 			...commonChartOptions.trendAxis,
 			color: {{ districtTrend.colors | dump | safe }},
 		}
-	},
-	toggle: _ => {
-		const toggleBtn = document.getElementById('toggle');
-		toggleBtn.addEventListener('change', (e) => {
-			location.reload();
-		});
 	},
 	checkboxFilters: (area) => {
 		let active = area.querySelectorAll('input[type=checkbox]');
@@ -177,13 +175,28 @@ const dashboard = {
 		const filters = [dashboard.filters.toggle(), dashboard.filters.trendRoomDistricts]
 		const cboxes = trendRooms.getElementsByTagName('input');
 		const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
+		const label = ['%','CHF'];
 		
 		trendRoomsEChart.setOption(dashboard.options.roomTrend);
 		trendRoomsEChart.setOption({
 			color: {{ roomTrend.colors | dump | safe }},
+			yAxis: {
+				name: label[filters[0]]
+			},
 			series: dashboard.data.trendRoom[filters[0]][filters[1].value],
 			legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
 		});
+
+		document.getElementById('toggle').addEventListener('change', (e) => {
+			filters[0] = dashboard.filters.toggle();
+			trendRoomsEChart.setOption({
+				series: dashboard.data.trendRoom[filters[0]][filters[1].value],
+				legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
+				yAxis: {
+					name: label[filters[0]]
+				},
+			});
+		})
 
 		filters[1].addEventListener('change', (e) => {
 			trendRoomsEChart.setOption({
@@ -207,13 +220,28 @@ const dashboard = {
 		const cboxes = trendDistrict.querySelectorAll('input[type=checkbox]'); 
 		const trendDistrictEChart = echarts.init(chart, null, {renderer: 'svg'});
 		const filters = [dashboard.filters.toggle(), dashboard.filters.trendDistrictRooms]
+		const label = ['%','CHF'];
 
 		trendDistrictEChart.setOption(dashboard.options.districtTrend);
 		trendDistrictEChart.setOption({
 			series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
 			color: {{ districtTrend.colors | dump | safe }},
 			legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
+			yAxis: {
+				name: label[filters[0]]
+			},
 		});
+
+		document.getElementById('toggle').addEventListener('change', (e) => {
+			filters[0] = dashboard.filters.toggle();
+			trendDistrictEChart.setOption({
+				series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
+				legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
+				yAxis: {
+					name: label[filters[0]]
+				},
+			});
+		})
 
 		filters[1].addEventListener('change', (e) => {
 			trendDistrictEChart.setOption({
@@ -239,14 +267,12 @@ const dashboard = {
 		const roomPriceChart = echarts.init(chart, null, {renderer: 'svg'});
 		const roomPriceChart2 = echarts.init(chart2, null, {renderer: 'svg'});
 		const filters = [dashboard.filters.year, dashboard.filters.roomPriceDistrict];
-
-		console.log(dashboard.data.pricePerRoom)
 		
 		roomPriceChart.setOption(dashboard.options.bar);
 		roomPriceChart.setOption({
 			color: {{ roomPrice.colors | dump | safe }},
-			series: dashboard.data.roomPriceData[filters[0].value][filters[1].value],				
-		});			
+			series: dashboard.data.roomPriceData[filters[0].value][filters[1].value],			
+		});
 		
 		roomPriceChart2.setOption(dashboard.options.bar);
 		roomPriceChart2.setOption({
@@ -255,12 +281,15 @@ const dashboard = {
 		});
 
 		filters[1].addEventListener('change', (e) => {
+
 			roomPriceChart.setOption({
 				series: dashboard.data.roomPriceData[filters[0].value][filters[1].value]
 			});
+
 			roomPriceChart2.setOption({
 				series: dashboard.data.pricePerRoom[filters[0].value][filters[1].value]
 			});
+
 		})
 
 		return [roomPriceChart, roomPriceChart2];
@@ -275,6 +304,7 @@ const dashboard = {
 
 		mapEChart.setOption({
 			visualMap: {
+				id: 'vismap',
 		    	left: 'left',
 		    	top: 'middle',
 		      	orient: 'horizontal',
@@ -324,7 +354,6 @@ const dashboard = {
 		let trendRoomChart = dashboard.trendRooms();
 		let roomPriceChart = dashboard.roomPrice();
 		let districtMap = dashboard.districtMap();
-		dashboard.toggle();
 
 		window.addEventListener('resize', function() {
 			trendDistrictChart.resize();
@@ -337,3 +366,6 @@ const dashboard = {
 }
 
 dashboard.init();
+
+})();
+

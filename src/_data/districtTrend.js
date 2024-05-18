@@ -27,8 +27,15 @@ module.exports = async function () {
         name: data.filters.districts[j],
         type: 'line',
         animation: false,
+        symbol: 'circle',
+        symbolSize: 13,
+        itemStyle: {
+          opacity: 0,
+        },
         emphasis: {
-          disabled: true,
+          itemStyle: {
+            opacity: 1,
+          },
         },
         lineStyle: {
           width: 4
@@ -42,8 +49,13 @@ module.exports = async function () {
         animation: false,
         symbol: 'circle',
         symbolSize: 13,
+        itemStyle: {
+          opacity: 0,
+        },
         emphasis: {
-          disabled: true,
+          itemStyle: {
+            opacity: 1,
+          },
         },
         lineStyle: {
           width: 4

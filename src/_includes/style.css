@@ -47,7 +47,7 @@ body{
 select {
   background-color: var(--fschema-el-2);
   border: .0625em solid var(--fschema-el-2);
-  border-radius: 3px;
+  border-radius: .1875em;
   padding: .2em .4em;
   margin: 0;
   width: auto;
@@ -56,6 +56,15 @@ select {
   font-weight: 500;
   cursor: inherit;
   line-height: inherit;
+}
+
+select:hover,
+select:focus{
+	background: var(--fschema-el-1);
+}
+
+article select{
+	font-size: .875em;
 }
 
 a{
@@ -114,14 +123,20 @@ button:focus{
 	cursor: pointer;
 }
 
+
+input[type="checkbox"]:focus + svg rect{
+	stroke: blue;
+}
+
+
 [popover] {
   background: #fff;
   padding: 1em 1.5em;
   border-radius: var(--default-border-rad);
   box-shadow: .0625em .0625em .625em rgba(0, 0, 0, 0.1);
-  width: 100%;
   max-width: 40em;
-  top: 2rem;
+  top: 50%;
+  transform: translate3d(0, -50%, 0);
   margin: 0 auto;
 
 }
@@ -135,22 +150,36 @@ label.toggle{
 
 label.toggle input[type=checkbox] ~ span{
 	display: inline-block;
-	background: #FCBBA1;
+	background: var(--fschema-el-3);
+	border: .0625em solid var(--fschema-el-3);
 	padding: .5em 0;
 	width: 3em;
 	text-align: center;
 }
 
 label.toggle input[type=checkbox] ~ .option:last-child{
-	background: #FEE0D2;
+	background: var(--fschema-el-2);
+	border: .0625em solid var(--fschema-el-2);
+}
+
+label.toggle input[type=checkbox] ~ .option:last-child:hover,
+label.toggle input[type=checkbox] ~ .option:last-child:focus{
+	background: var(--fschema-el-1);
 }
 
 label.toggle input[type=checkbox]:checked ~ .option{
-	background:#FEE0D2;
+	background: var(--fschema-el-2);
+	border: .0625em solid var(--fschema-el-2);
+}
+
+label.toggle input[type=checkbox]:checked ~ .option:hover,
+label.toggle input[type=checkbox]:checked ~ .option:focus{
+	background: var(--fschema-el-1);
 }
 
 label.toggle input[type=checkbox]:checked ~ .option:last-child{
-	background: #FCBBA1;
+	background: var(--fschema-el-3);
+	border: .0625em solid var(--fschema-el-3);
 }
 
 .legend label{
@@ -203,7 +232,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	border-radius: var(--default-border-rad);
 	padding: 1.125em 1.875em;
 	display: grid;
-	grid-template-rows: repeat(2, 50%);
+	grid-template-rows: repeat(2, minmax(0, 1fr));
 	row-gap: 1em;
 	align-items: stretch;
 }
@@ -291,17 +320,17 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	border-right: .0625em solid var(--grey2);
 }
 
-#map h3{
+#map>h3{
 	grid-column-start: 1;
 	grid-row-start: 1;
 }
 
-#map p{
+#map>p{
 	grid-column-start: 1;
 	grid-row-start: 2;
 }
 
-#map select{
+#map>select{
 	grid-column-start: 2;
 	grid-column-end: 3;
 	grid-row-start: 1;
@@ -309,7 +338,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	z-index: 1;
 }
 
-#map .dia{
+#map>.dia{
 	grid-column-start: 1;
 	grid-column-end: 3;
 	grid-row-start: 1;
@@ -320,7 +349,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	display: grid;
 	padding-left: 1.25em;
 	grid-template-rows: auto;
-	grid-template-columns: repeat(2, 50%);
+	grid-template-columns: repeat(2, minmax(0,1fr));
 }
 
 #roompriceroom{
@@ -335,11 +364,12 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	grid-row-end: 2;
 }
 
-#roompriceroom p{
+#roompriceroom>p{
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 2;
 	grid-row-end: 3;
+	margin-top: .5em;
 }
 
 #roompriceroom .dia{
@@ -351,60 +381,37 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 
 #roompriceperroom{
 	grid-template-rows: auto auto 1fr;
-	grid-template-columns: auto 1fr;
+	grid-template-columns: auto . 1fr;
 }
 
-#roompriceperroom h3{
+#roompriceperroom>h3{
 	grid-column-start: 1;
 	grid-column-end: 2;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 
-#roompriceperroom p{
+#roompriceperroom>p{
+	margin-top: .5em;
 	grid-column-start: 1;
-	grid-column-end: 3;
+	grid-column-end: 4;
 	grid-row-start: 2;
 	grid-row-end: 3;
 }
 
-#roompriceperroom select{
-	grid-column-start: 2;
-	grid-column-end: 3;
+#roompriceperroom>select{
+	grid-column-start: 3;
+	grid-column-end: 4;
 	grid-row-start: 1;
 	grid-row-end: 2;
 }
 
-#roompriceperroom .dia{
+#roompriceperroom>.dia{
 	grid-column-start: 1;
-	grid-column-end: 3;
-	grid-row-start: 2;
+	grid-column-end: 4;
+	grid-row-start: 3;
 	grid-row-end: 4;
 }
-
-
-/*
-#roompricefilter{
-	display: grid;
-	grid-template-columns: 50% 50%;
-	grid-template-rows: auto 1fr;
-	grid-template-areas: 
-    "tit fil"
-    "lea lea";
-}
-
-#roompricefilter h3{
-	grid-area: tit;
-}
-
-#roompricefilter select{
-	grid-area: fil;
-}
-
-#roompricefilter p{
-	grid-area: lea;
-}
-*/
 
 @media(max-width: 75em){
 
@@ -417,6 +424,17 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 		grid-template-columns: 100%;
 		grid-row-gap: 2em;
 	}
+
+	#trend-district{
+		padding-right: 0;
+		border: unset;
+	}
+
+	#trend-rooms{
+		padding-left: 0;
+	}
+
+
 
 }
 

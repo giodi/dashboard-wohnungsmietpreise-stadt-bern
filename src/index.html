@@ -90,7 +90,7 @@ layout: base.njk
 						<h3>Zimmerpreis</h3>
 						<p>Preis pro Zimmer nach Wohnungsgrösse.</p>
 						{% set options = roomPrice.filters.districts %}
-						{% set id = "roomprice" %}
+						{% set id = "roompricdistricts" %}
 						{% include "select.njk" %}
 						<div class="dia"></div>
 					</article>
@@ -99,7 +99,7 @@ layout: base.njk
 		</section>
 	</main>
 </div>
-<script src="https://cdn.jsdelivr.net/npm/echarts@5.5.0/dist/echarts.min.js"></script>
+<script src="assets/js/echarts.min.js"></script>
 <script type="text/javascript">
 {% include "dashboard.js" %}
 </script>

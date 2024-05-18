@@ -1,5 +1,4 @@
 const data = require("./data_absolut.json");
-const data_perc = require("./data_index.json");
 const themes = require("./colors.json");
 
 module.exports = async function () {
@@ -28,6 +27,16 @@ module.exports = async function () {
         name: data.filters.rooms[j],
         type: 'line',
         animation: false,
+        symbol: 'circle',
+        symbolSize: 13,
+        itemStyle: {
+          opacity: 0,
+        },
+        emphasis: {
+          itemStyle: {
+            opacity: 1,
+          },
+        },
         lineStyle: {
           width: 4
         },
@@ -38,6 +47,16 @@ module.exports = async function () {
       	name: data.filters.rooms[j],
         type: 'line',
         animation: false,
+        symbol: 'circle',
+        symbolSize: 13,
+        itemStyle: {
+          opacity: 0,
+        },
+        emphasis: {
+          itemStyle: {
+            opacity: 1,
+          },
+        },
         lineStyle: {
           width: 4
         },

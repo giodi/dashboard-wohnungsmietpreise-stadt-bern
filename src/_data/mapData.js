@@ -47,12 +47,12 @@ module.exports = async function () {
 			let lowest = sorted[0];
 			let difference = (Math.abs(highest.price - lowest.price) / ((highest.price + lowest.price) / 2)) * 100;
 
-			let textVars = [data.filters.districts[lowest.district],lowest.price,data.filters.districts[highest.district], highest.price, difference.toFixed(2)];
+			let textVars = [data.filters.districts[lowest.district],lowest.price.toLocaleString('de-CH'),data.filters.districts[highest.district], highest.price.toLocaleString('de-CH'), difference.toFixed(2).toLocaleString('de-CH')];
 
 			let visualMap = {
 				min: lowest.price,
 				max: highest.price,
-				text: [highest.price, lowest.price],
+				text: [highest.price.toLocaleString('de-CH'), lowest.price.toLocaleString('de-CH')],
 				inRange: {
 					color: themes.continuous
 				}
