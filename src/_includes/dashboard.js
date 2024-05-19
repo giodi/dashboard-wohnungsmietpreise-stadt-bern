@@ -109,11 +109,10 @@ const dashboard = {
 		bar: {
 			...commonChartOptions.basis,
 			grid: {
-				left: 0,
-				right: 10,
+				right: 60,
 				top: 10,
+				left: 0,
 				bottom: 0,
-				containLabel: true,
 			},
 			tooltip: {
 				show: false,
@@ -306,6 +305,18 @@ const dashboard = {
 			color: {{ pricePerRoom.colors | dump | safe }},
 			series: dashboard.data.pricePerRoom[filters[0].value][filters[1].value],				
 		});
+
+		filters[0].addEventListener('change', (e) => {
+
+			roomPriceChart.setOption({
+				series: dashboard.data.roomPriceData[filters[0].value][filters[1].value]
+			});
+
+			roomPriceChart2.setOption({
+				series: dashboard.data.pricePerRoom[filters[0].value][filters[1].value]
+			});
+
+		})
 
 		filters[1].addEventListener('change', (e) => {
 

@@ -67,7 +67,7 @@ layout: base.njk
 				<h2>Jahresübersicht</h2>
 				<select id="details_years">
 					{% for year in data_absolut.years %}
-					<option value="{{loop.index0}}" {% if loop.index == loop.length %}checked{% endif %}>{{ year.year }}</option>
+					<option value="{{loop.index0}}" {% if loop.index == loop.length %}selected{% endif %}>{{ year.year }}</option>
 					{% endfor %}
 				</select>
 			</header>
