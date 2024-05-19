@@ -94,7 +94,7 @@ const dashboard = {
 		pricePerRoom: {{ pricePerRoom.series | dump | safe }},
 		map: {{ mapData | dump | safe }},
 		mapText: (txt) => {
-			document.getElementById('desc').innerText = `Der Stadtteil ${txt[0]} hat mit CHF ${txt[1]} die tiefsten, der Stadtteil ${txt[2]} mit CHF ${txt[3]} die höchsten Mietpreise. Das entspricht einem Unterschied von ${txt[4]} Prozent.`
+			document.getElementById('desc').innerHTML = `Der Stadtteil ${txt[0]} hat mit CHF&nbsp;${txt[1]} die tiefsten, der Stadtteil ${txt[2]} mit CHF&nbsp;${txt[3]} die höchsten Mietpreise. Das entspricht einem Unterschied von ${txt[4]} Prozent.`
 		}
 	},
 	filters: {
@@ -108,6 +108,13 @@ const dashboard = {
 	options: {
 		bar: {
 			...commonChartOptions.basis,
+			grid: {
+				left: 0,
+				right: 10,
+				top: 10,
+				bottom: 0,
+				containLabel: true,
+			},
 			tooltip: {
 				show: false,
 			},
@@ -183,6 +190,9 @@ const dashboard = {
 			yAxis: {
 				name: label[filters[0]]
 			},
+			tooltip: {
+				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+			},
 			series: dashboard.data.trendRoom[filters[0]][filters[1].value],
 			legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
 		});
@@ -192,6 +202,9 @@ const dashboard = {
 			trendRoomsEChart.setOption({
 				series: dashboard.data.trendRoom[filters[0]][filters[1].value],
 				legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
+				tooltip: {
+					formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+				},
 				yAxis: {
 					name: label[filters[0]]
 				},
@@ -207,6 +220,10 @@ const dashboard = {
 
 		for(cbox of cboxes){
 			cbox.addEventListener('click', (e) => {
+				if(!trendRooms.querySelector('input[type=checkbox]:checked')){
+					e.target.checked = true;
+					return;
+				}
 				trendRoomsEChart.setOption({legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)}});
 			})
 		}
@@ -227,6 +244,9 @@ const dashboard = {
 			series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
 			color: {{ districtTrend.colors | dump | safe }},
 			legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
+			tooltip: {
+				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+			},
 			yAxis: {
 				name: label[filters[0]]
 			},
@@ -237,6 +257,9 @@ const dashboard = {
 			trendDistrictEChart.setOption({
 				series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
 				legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
+				tooltip: {
+					formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+				},
 				yAxis: {
 					name: label[filters[0]]
 				},
@@ -252,6 +275,10 @@ const dashboard = {
 
 		for(cbox of cboxes){
 			cbox.addEventListener('click', (e) => {
+				if(!trendDistrict.querySelector('input[type=checkbox]:checked')){
+					e.target.checked = true;
+					return;
+				}
 				trendDistrictEChart.setOption({legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)}});
 			})
 		}
