@@ -13,14 +13,15 @@ module.exports = function(eleventyConfig) {
 		const year = now.getFullYear();
 		let month = now.getMonth() + 1;
 		month = month < 10  ? '0'+month : month;
-		let day = now.getDay() + 1;
+		let day = now.getDate();
 		day = day < 10  ? '0'+day : day;
 
-		return `${year}-${month}-${day}`;
+		return `${day}.${month}.${year}`;
 	});
 
 	eleventyConfig.addPassthroughCopy("./src/assets/img");
 	eleventyConfig.addPassthroughCopy("./src/assets/js");
+	eleventyConfig.addPassthroughCopy("./src/assets/fonts");
 
 	return {
 		markdownTemplateEngine: "njk",

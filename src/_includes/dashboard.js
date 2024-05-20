@@ -187,7 +187,10 @@ const dashboard = {
 		trendRoomsEChart.setOption({
 			color: {{ roomTrend.colors | dump | safe }},
 			yAxis: {
-				name: label[filters[0]]
+				name: label[filters[0]],
+				axisLabel: {
+					formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+				}
 			},
 			tooltip: {
 				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
@@ -205,7 +208,10 @@ const dashboard = {
 					formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
 				},
 				yAxis: {
-					name: label[filters[0]]
+					name: label[filters[0]],
+					axisLabel: {
+						formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+					}
 				},
 			});
 		})
@@ -247,7 +253,10 @@ const dashboard = {
 				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
 			},
 			yAxis: {
-				name: label[filters[0]]
+				name: label[filters[0]],
+				axisLabel: {
+					formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+				}
 			},
 		});
 
@@ -260,7 +269,10 @@ const dashboard = {
 					formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
 				},
 				yAxis: {
-					name: label[filters[0]]
+					name: label[filters[0]],
+						axisLabel: {
+						formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+					}
 				},
 			});
 		})

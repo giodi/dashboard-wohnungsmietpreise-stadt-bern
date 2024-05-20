@@ -12,7 +12,9 @@
     <title>Dashboard Wohnungsmietpreise in der Stadt Bern</title>
     <style>
     {% set css %}
+        {% include "inter.css" %}
         {% include "style.css" %}
+        }
     {% endset %}
     {{ css | cssmin | safe }}
     </style>

@@ -1,17 +1,26 @@
-/* Dash Styles */
 :root{
-	--ff-main: 'Inter', Helvetica, Arial, Verdana, sans-serif;
-	--bg1: #fff;
+	font-family: Inter, sans-serif;
+	font-feature-settings: 'liga' 1, 'calt' 1;
+	--bg1: #FFF;
 	--bg2: #FFF5F0;
 	--grey1: #757575;
 	--grey2: #575757;
 	--text-clr: #000;
-	--fschema-el-0: #fff;
+	--fschema-el-0: #FFF;
 	--fschema-el-1: #FFF5F0;
 	--fschema-el-2: #FEE0D2;
 	--fschema-el-3: #FCBBA1;
 	--fschema-el-4: #FC9272;
 	--default-border-rad: 0.9375rem;
+	--small-border: 0.3125em;
+	--h1-fs: 2.125em;
+	--h2-fs: 1.375em;
+	--h3-fs: 1.125em;
+	--h4-fs: .875em;
+}
+
+@supports (font-variation-settings: normal) {
+  :root { font-family: InterVariable, sans-serif; }
 }
 
 html, body, div, span, h1, h2, h3, h4, p, a, abbr, img, strong, 
@@ -22,7 +31,6 @@ main, section {
 	border: 0;
 	font-size: 100%;
 	font: inherit;
-	font-family: var(--ff-main);
 	vertical-align: baseline;
 	box-sizing: border-box;
 }
@@ -41,17 +49,15 @@ body{
 	display: grid;
 	height: 100vh;
 	padding: 1em;
-	font-family: var(--ff-main);
 }
 
 select {
   background-color: var(--fschema-el-2);
   border: .0625em solid var(--fschema-el-2);
-  border-radius: .1875em;
-  padding: .2em .4em;
+  border-radius: var(--small-border);
+  padding: .5em .4em;
   margin: 0;
   width: auto;
-  font-family: var(--ff-main);
   font-size: inherit;
   font-weight: 500;
   cursor: inherit;
@@ -72,27 +78,39 @@ a{
 }
 
 h1{
-	font: 700 2.125em 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: var(--h1-fs);
 }
 
 h2{
-	font: 500 1.375em 'Inter', sans-serif;
+	font-weight: 500; 
+	font-size: var(--h2-fs);
 }
 
 h3{
-	font: 700 1.125em 'Inter', sans-serif;
+	font-weight: 700;
+	font-size: var(--h3-fs);
 }
 
 h4,
 p{
-	font: 500 .875em 'Inter', sans-serif;
+	font-weight: 500; 
+	font-size: var(--h4-fs);
 	color: var(--grey2);
+}
+
+p>*{
+	font-weight: 500;
+	color: var(--grey2);
+}
+
+a{
+	text-underline-offset: 3px;
 }
 
 p{
 	line-height: 1.2;
 }
-
 
 article{
 	display: grid;
@@ -103,18 +121,28 @@ button{
 	border: .0625em solid var(--fschema-el-2);
 	color: #000;
 	padding: 1em;
-	border-radius: 3px;
+	border-radius: var(--small-border);
 	font-weight: 600;
+}
+
+button>span:last-child{
+	display: none;
 }
 
 button.close{
 	position: absolute;
 	top: .5em;
 	right: .5em;
-	width: 2em;
-	height: 2em;
-	padding: 0;
 	border-radius: 50%;
+	width: 1em;
+	height: 1em;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button.close svg{
+	width: 1em;
 }
 
 button:hover,
@@ -135,16 +163,34 @@ input[type="checkbox"]:focus + svg rect{
   border-radius: var(--default-border-rad);
   box-shadow: .0625em .0625em .625em rgba(0, 0, 0, 0.1);
   max-width: 40em;
-  top: 50%;
-  transform: translate3d(0, -50%, 0);
+  top: 4em;
   margin: 0 auto;
+}
+
+[popover]::backdrop{
+	background-color: rgba(0,0,0,.5);
+}
+
+[popover] h3{
+	margin-top: 1em;
+
+}
+
+[popover] p{
+	font-size: 1em;
+	line-height: 1.5;
+}
+
+[popover] p,
+[popover] p>*{
+	color: #000;
 
 }
 
 label.toggle{
 	margin-left: 1em;
 	display: inline-block;
-	border-radius: .3125em;
+	border-radius: var(--small-border);
 	overflow: hidden;
 }
 
@@ -189,9 +235,13 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 	font-size: .875em;
 }
 
+.legend ul{
+	margin-top: .5em;
+}
+
 .legend svg{
-	width: 1em;
-	min-width: 1em;
+	width: 1.25em;
+	min-width: 1.25em;
 	margin-right: .3em;
 }
 
@@ -212,6 +262,10 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
   overflow: hidden;
 }
 
+p.footnote{
+	margin-top: 1em;
+}
+
 #dashboard{
 	display: grid;
 	grid-template-columns: 1fr;
@@ -230,7 +284,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 #dashboard>main{
 	background: var(--fschema-el-1);
 	border-radius: var(--default-border-rad);
-	padding: 1.125em 1.875em;
+	padding: 1.125em 1.875em 1.5em;
 	display: grid;
 	grid-template-rows: repeat(2, minmax(0, 1fr));
 	row-gap: 1em;
@@ -326,6 +380,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 }
 
 #map>p{
+	max-width: 75%;
 	grid-column: 1;
 	grid-row: 2;
 }
@@ -422,12 +477,80 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 		padding-left: 0;
 	}
 
+	#trend-district,
+	#trend-rooms{
+		grid-template-rows: auto minmax(11em, 1fr);
+	}
+
 }
 
 @media(max-width: 47.5em){
 
+
+[popover] {
+  border-radius: unset;
+  box-shadow: unset;
+  max-width: 100%;
+  top: 4em;
+  height: calc(100vh - 4em);
+  transform: unset;
+  margin: 0 auto;
+}
+
+button{
+	background: #670009;
+	color: #fff;
+	border-radius: 50%;
+	width: 2.5em;
+	height: 2.5em;
+	text-align: center;
+	display: inline-flex;
+	justify-content: center;
+	align-items: center;
+}
+
+button:hover,
+button:focus{
+	color: #670009;
+}
+
+	button>span:last-child{
+		display: inline;
+	}
+	button>span:first-child{
+	display: none;
+}
+
+#dashboard>header{
+	background: #670009;
+	color: #fff;
+	position: fixed;
+	width: 100%;
+	height: 4em ;
+	z-index: 99;
+	top: 0;
+	box-shadow: 0 0 .652em rgba(0,0,0,.2);
+}
+
+	#dashboard > main > section > header{
+		display: unset;
+		position: sticky;
+		z-index: 2;
+		top: 4em;
+	}
+
+	#dashboard > main{
+		border-radius: 0;
+		margin-top: 4em;
+	}
+
+	#dashboard > main > section > header > select,
+	label.toggle{
+		margin-left: 0;
+	}
+
 	body {
-		padding: .5em;
+		padding: 0;
 	}
 
 	#dashboard>main{
@@ -448,25 +571,40 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 #trend-rooms,
 #trend-district{
 	grid-row-gap:.5em;
-	grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: auto auto minmax(15em, 1fr) auto;
-  grid-template-areas: "title filter" "lead lead" "dia dia" "legend legend";
+	grid-template-columns: 1fr;
+  grid-template-rows: auto auto  minmax(15em, 1fr)  auto auto;
+  grid-template-areas: "title" "lead" "dia" "filter" "legend";
+}
+
+#trend-district .filter, 
+#trend-rooms .filter{
+	justify-self: start;
+}
+
+#map{
+	grid-template-columns: 1fr;
+	grid-template-rows: auto auto auto 1fr;
 }
 
 #map > p{
-	grid-column: 1 / 3;
+	grid-column: 1 / 2;
+	grid-row: 2 / 3;
 }
 
-#map > .dia{
+#map>select{
+	grid-column: 1 / 2;
 	grid-row: 3 / 4;
-	grid-column: 1 / 3;
+}
+
+#map>.dia{
+	grid-column: 1 / 2;
+	grid-row: 4 / 5;
 }
 
 #roomprice{
 	padding-left: 0;
 	grid-template-columns: 1fr;
 }
-
 
 .legend ul{
 	display: flex;
