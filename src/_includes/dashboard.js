@@ -99,7 +99,7 @@ const dashboard = {
 	},
 	filters: {
 		toggle: _ => {return document.getElementById('toggle').checked ? 1 : 0},
-		vismapPos: _ => {return window.innerWidth < 760 ? {visualMap: {top: 'bottom', left: 'center'}, series: [{type: 'map', map: 'stadtteile', left: 'center', top: 'top'}]} : {visualMap: {top: 'center', left: 'left'}, series: [{type: 'map', map: 'stadtteile', left: 'right', top: 'top'}]}},
+		vismapPos: _ => {return window.innerWidth < 760 ? {visualMap: {top: 'bottom', left: 'center'}, series: [{type: 'map', map: 'stadtteile', left: 'center', top: 'top'}]} : {visualMap: {top: 'center', left: 'left'}, series: [{type: 'map', map: 'stadtteile', left: 'right', top: 'center'}]}},
 		year: document.getElementById('details_years'),
 		roomPriceDistrict: document.getElementById('roompricdistricts'),
 		trendDistrictRooms: document.getElementById('district-trend-rooms'),
