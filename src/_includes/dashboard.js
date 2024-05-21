@@ -99,6 +99,7 @@ const dashboard = {
 	},
 	filters: {
 		toggle: _ => {return document.getElementById('toggle').checked ? 1 : 0},
+		vismapPos: _ => {return window.innerWidth < 760 ? {visualMap: {top: 'bottom', left: 'center'}, series: [{type: 'map', map: 'stadtteile', left: 'center', top: 'top'}]} : {visualMap: {top: 'center', left: 'left'}, series: [{type: 'map', map: 'stadtteile', left: 'right', top: 'top'}]}},
 		year: document.getElementById('details_years'),
 		roomPriceDistrict: document.getElementById('roompricdistricts'),
 		trendDistrictRooms: document.getElementById('district-trend-rooms'),
@@ -298,10 +299,8 @@ const dashboard = {
 	},
 	roomPrice: _ => {
 
-		const roomPrice = document.getElementById('roomprice');
-		const chart = roomPrice.getElementsByClassName('dia')[0];
-		const chart2 = roomPrice.getElementsByClassName('dia')[1];
-
+		const chart = document.getElementById('roompriceroom');
+		const chart2 = document.getElementById('roompriceperroom');		
 		const roomPriceChart = echarts.init(chart, null, {renderer: 'svg'});
 		const roomPriceChart2 = echarts.init(chart2, null, {renderer: 'svg'});
 		const filters = [dashboard.filters.year, dashboard.filters.roomPriceDistrict];
@@ -355,9 +354,7 @@ const dashboard = {
 		mapEChart.setOption({
 			visualMap: {
 				id: 'vismap',
-		    	left: 'left',
-		    	top: 'middle',
-		      	orient: 'horizontal',
+		    	orient: 'horizontal',
 		      	realtime: true,
 		      	calculable: false,
 		      	textStyle: {
@@ -369,23 +366,30 @@ const dashboard = {
 		      		borderColor: '#575757'
 		      	}
 		    },
-		    series: [
-		    	{
-		            type: 'map',
-		            map: 'stadtteile',
-		            roam: false,
-		            left: 'right',
-		           	aspectScale: 1,
-		            emphasis: {
-		                disabled: true,
-		            },
-		            selectedMode: false
-		        }
-		        ]
+		    series: [{
+		        type: 'map',
+	            map: 'stadtteile',
+	            roam: false,
+	            left: 'right',
+	            top: 'top',
+	           	//layoutCenter: ['50%', '50%'],
+	           	//layoutSize: 100,
+	            emphasis: {
+	                disabled: true,
+	            },
+	            selectedMode: false
+		    }]
 		});
+
+		mapEChart.setOption(dashboard.filters.vismapPos())
+
 
 		dashboard.data.mapText(dashboard.data.map[filters[0].value][filters[1].value][1]);
 		mapEChart.setOption(dashboard.data.map[filters[0].value][filters[1].value][0]);
+
+		window.addEventListener('resize', _ => {
+			mapEChart.setOption(dashboard.filters.vismapPos());
+		})
 
 		filters[0].addEventListener('change', (e) => {
 			dashboard.data.mapText(dashboard.data.map[filters[0].value][filters[1].value][1]);
@@ -405,7 +409,7 @@ const dashboard = {
 		let roomPriceChart = dashboard.roomPrice();
 		let districtMap = dashboard.districtMap();
 
-		window.addEventListener('resize', function() {
+		window.addEventListener('resize', _ => {
 			trendDistrictChart.resize();
 			trendRoomChart.resize();
 			roomPriceChart[0].resize();

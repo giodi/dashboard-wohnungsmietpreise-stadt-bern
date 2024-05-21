@@ -14,6 +14,7 @@
     {% set css %}
         {% include "inter.css" %}
         {% include "style.css" %}
+        {% include "style_mobile.css" %}
         }
     {% endset %}
     {{ css | cssmin | safe }}
