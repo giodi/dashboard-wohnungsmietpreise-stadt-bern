@@ -49,7 +49,7 @@ const commonChartOptions = {
 		    	},
 		    },
 		    axisLabel: {
-		    	fontSize: 14, 
+		    	fontSize: 14,
 		    	fontFamily: 'Inter, sans-serif',
 		    },
 		},
@@ -78,7 +78,7 @@ const commonChartOptions = {
 		    	},
 		    },
 		    axisLabel: {
-		    	fontSize: 14, 
+		    	fontSize: 14,
 		    	fontFamily: 'Inter, sans-serif',
 		    	formatter: (val) => {return val.toLocaleString('de-CH')},
 		    },
@@ -89,6 +89,7 @@ const commonChartOptions = {
 const dashboard = {
 	data: {
 		trendDistrict: [{{ districtTrend.series_percent | dump | safe }}, {{ districtTrend.series | dump | safe }}],
+		trendDistrictMinMax: {{ districtTrend.minMax | dump | safe }},
 		trendRoom: [{{ roomTrend.series_percent | dump | safe }}, {{ roomTrend.series | dump | safe }}],
 		roomPriceData: {{ roomPrice.series | dump | safe }},
 		pricePerRoom: {{ pricePerRoom.series | dump | safe }},
@@ -183,7 +184,7 @@ const dashboard = {
 		const cboxes = trendRooms.getElementsByTagName('input');
 		const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
 		const label = ['%','CHF'];
-		
+
 		trendRoomsEChart.setOption(dashboard.options.roomTrend);
 		trendRoomsEChart.setOption({
 			color: {{ roomTrend.colors | dump | safe }},
@@ -245,6 +246,8 @@ const dashboard = {
 		const filters = [dashboard.filters.toggle(), dashboard.filters.trendDistrictRooms]
 		const label = ['%','CHF'];
 
+		console.log(dashboard.data.trendDistrictMinMax);
+
 		trendDistrictEChart.setOption(dashboard.options.districtTrend);
 		trendDistrictEChart.setOption({
 			series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
@@ -255,6 +258,8 @@ const dashboard = {
 			},
 			yAxis: {
 				name: label[filters[0]],
+				min: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].min,
+				max: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].max,
 				axisLabel: {
 					formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
 				}
@@ -271,6 +276,8 @@ const dashboard = {
 				},
 				yAxis: {
 					name: label[filters[0]],
+					min: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].min,
+					max: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].max,
 						axisLabel: {
 						formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
 					}
@@ -280,6 +287,10 @@ const dashboard = {
 
 		filters[1].addEventListener('change', (e) => {
 			trendDistrictEChart.setOption({
+				yAxis: {
+					min: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].min,
+					max: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].max,
+				},
 				series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
 				legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
 			});
@@ -372,8 +383,6 @@ const dashboard = {
 	            roam: false,
 	            left: 'right',
 	            top: 'top',
-	           	//layoutCenter: ['50%', '50%'],
-	           	//layoutSize: 100,
 	            emphasis: {
 	                disabled: true,
 	            },
