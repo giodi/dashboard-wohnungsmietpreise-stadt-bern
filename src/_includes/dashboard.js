@@ -119,7 +119,7 @@ const dashboard = {
 			tooltip: {
 				show: false,
 			},
-			color: "{{ roomPrice.colors }}",
+			color: {{ pricePerRoom.colors | dump | safe }},
 			legendHoverLink: false,
 			xAxis: {
 				zlevel: 99,
@@ -239,14 +239,14 @@ const dashboard = {
 	},
 	trendDistrict: _ => {
 
+		console.log();
+
 		const trendDistrict = document.getElementById('trend-district');
 		const chart = trendDistrict.getElementsByClassName('dia')[0];
 		const cboxes = trendDistrict.querySelectorAll('input[type=checkbox]'); 
 		const trendDistrictEChart = echarts.init(chart, null, {renderer: 'svg'});
 		const filters = [dashboard.filters.toggle(), dashboard.filters.trendDistrictRooms]
 		const label = ['%','CHF'];
-
-		console.log(dashboard.data.trendDistrictMinMax);
 
 		trendDistrictEChart.setOption(dashboard.options.districtTrend);
 		trendDistrictEChart.setOption({
@@ -318,13 +318,14 @@ const dashboard = {
 		
 		roomPriceChart.setOption(dashboard.options.bar);
 		roomPriceChart.setOption({
-			color: {{ roomPrice.colors | dump | safe }},
+			color: {{ pricePerRoom.colors | dump | safe }},
+			colorBy: 'data',
 			series: dashboard.data.roomPriceData[filters[0].value][filters[1].value],			
 		});
 		
 		roomPriceChart2.setOption(dashboard.options.bar);
 		roomPriceChart2.setOption({
-			color: {{ pricePerRoom.colors | dump | safe }},
+			colorBy: 'data',
 			series: dashboard.data.pricePerRoom[filters[0].value][filters[1].value],				
 		});
 

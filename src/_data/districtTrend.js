@@ -10,7 +10,7 @@ module.exports = async function () {
 
   // Objekt mit Optionen für Echarts
   let districtTrendData = {
-    colors: themes.divergent,
+    colors: themes.continuous,
     filters: {
       rooms: data.filters.rooms,
       districts: districts

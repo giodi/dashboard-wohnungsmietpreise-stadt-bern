@@ -19,7 +19,7 @@ layout: base.njk
 			<div>
 				<article id="trend-district">
 					<h3>Stadtteil</h3>
-					<p>Entwicklung Wohnungsmietpreise nach Stadtteil.</p>
+					<p>Entwicklung Wohnungsmietpreise nach Stadtteil.<br />Basisjahr {{ data_absolut.years[0].year }}</p>
 					<div class="filter">
 						{% set options = districtTrend.filters.rooms %}
 						{% set id = "district-trend-rooms" %}
@@ -40,7 +40,7 @@ layout: base.njk
 						{% set id = "rooms-trend-district" %}
 						{% include "select.njk" %}
 					</div>
-					<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse.</p>
+					<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse.<br>Basisjahr {{ data_absolut.years[0].year }}</p>
 					<div class="legend">
 						<h4>Wohnungsgrössen</h4>
 						{% set options = roomTrend.filters.rooms %}

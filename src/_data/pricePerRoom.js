@@ -7,7 +7,7 @@ module.exports = async function () {
 	const rooms = getRooms.map((x) => x.substr(0,4));
 
 	let roomPriceData = {
-		colors: themes.bar,
+		colors: themes.continuous,
 		filters: {
 			rooms: rooms,
 			districts: data.filters.districts
