@@ -91,6 +91,7 @@ const dashboard = {
 		trendDistrict: [{{ districtTrend.series_percent | dump | safe }}, {{ districtTrend.series | dump | safe }}],
 		trendDistrictMinMax: {{ districtTrend.minMax | dump | safe }},
 		trendRoom: [{{ roomTrend.series_percent | dump | safe }}, {{ roomTrend.series | dump | safe }}],
+		trendRoomMinMax: {{ roomTrend.minMax | dump | safe }},
 		roomPriceData: {{ roomPrice.series | dump | safe }},
 		pricePerRoom: {{ pricePerRoom.series | dump | safe }},
 		map: {{ mapData | dump | safe }},
@@ -185,11 +186,16 @@ const dashboard = {
 		const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
 		const label = ['%','CHF'];
 
+		console.log(dashboard.data.trendRoomMinMax);
+		console.log(filters[0]);
+
 		trendRoomsEChart.setOption(dashboard.options.roomTrend);
 		trendRoomsEChart.setOption({
 			color: {{ roomTrend.colors | dump | safe }},
 			yAxis: {
 				name: label[filters[0]],
+				min: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].min,
+				max: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].max,
 				axisLabel: {
 					formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
 				}
@@ -211,6 +217,8 @@ const dashboard = {
 				},
 				yAxis: {
 					name: label[filters[0]],
+					min: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].min,
+					max: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].max,
 					axisLabel: {
 						formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
 					}
@@ -220,6 +228,10 @@ const dashboard = {
 
 		filters[1].addEventListener('change', (e) => {
 			trendRoomsEChart.setOption({
+				yAxis: {
+					min: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].min,
+					max: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].max,
+				},
 				series: dashboard.data.trendRoom[filters[0]][filters[1].value],
 				legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
 			});
