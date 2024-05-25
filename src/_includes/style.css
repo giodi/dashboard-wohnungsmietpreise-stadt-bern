@@ -352,12 +352,14 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 #trend-district h3,
 #trend-rooms h3{
 	grid-area: title;
+	align-content: center;
 }
 
 #trend-district p,
 #trend-rooms p{
 	grid-area: lead;
 	padding-right: .5em;
+	margin-top: .5em;
 }
 
 #trend-district .legend,
@@ -378,6 +380,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 #map>h3{
 	grid-column: 1;
 	grid-row: 1;
+	align-content: center;
 }
 
 #map>p{
@@ -408,6 +411,7 @@ label.toggle input[type=checkbox]:checked ~ .option:last-child{
 
 #roomprice h3{
 	grid-area: title;
+	align-content: center;
 }
 
 #roomprice .filter{
