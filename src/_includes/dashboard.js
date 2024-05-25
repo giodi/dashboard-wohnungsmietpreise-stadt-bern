@@ -96,7 +96,7 @@ const dashboard = {
 		pricePerRoom: {{ pricePerRoom.series | dump | safe }},
 		map: {{ mapData | dump | safe }},
 		mapText: (txt) => {
-			document.getElementById('desc').innerHTML = `Der Stadtteil ${txt[0]} hat mit CHF&nbsp;${txt[1]} die tiefsten, der Stadtteil ${txt[2]} mit CHF&nbsp;${txt[3]} die höchsten Mietpreise. Das entspricht einem Unterschied von ${txt[4]} Prozent.`
+			document.getElementById('desc').innerHTML = `Der Stadtteil «${txt[0]}» hat mit CHF&nbsp;${txt[1]} die tiefsten, der Stadtteil «${txt[2]}» mit CHF&nbsp;${txt[3]} die höchsten Mietpreise. Das entspricht einem Unterschied von ${txt[4]} Prozent.`
 		}
 	},
 	filters: {
@@ -247,6 +247,8 @@ const dashboard = {
 		return trendRoomsEChart;
 	},
 	trendDistrict: _ => {
+
+		console.log(dashboard.data.trendDistrict)
 		const trendDistrict = document.getElementById('trend-district');
 		const chart = trendDistrict.getElementsByClassName('dia')[0];
 		const cboxes = trendDistrict.querySelectorAll('input[type=checkbox]'); 

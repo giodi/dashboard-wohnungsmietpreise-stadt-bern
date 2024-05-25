@@ -67,8 +67,8 @@ module.exports = async function () {
 
       // Iteration dritte Ebene (Jahre)
       for(const year of data.years){
-        roomItem.data.push(year.districts[indexDistrict].rooms[indexRoomSize]);
-        roomItemPercent.data.push(((100 / data.years[0].districts[indexDistrict].rooms[indexRoomSize]) * year.districts[indexDistrict].rooms[indexRoomSize] - 100).toFixed(2));
+        roomItem.data.push(year.districts[indexDistrict].rooms[indexRoomSize + 1]);
+        roomItemPercent.data.push(((100 / data.years[0].districts[indexDistrict].rooms[indexRoomSize + 1]) * year.districts[indexDistrict].rooms[indexRoomSize + 1] - 100).toFixed(2));
       }
 
       seriesDistrict.push(roomItem);
