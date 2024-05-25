@@ -1,26 +1,31 @@
 const data = require("./data_absolut.json");
-const themes = require("./colors.json");
+const colorThemes = require("./colors.json");
 
 module.exports = async function () {
 
-	const getRooms = data.filters.rooms.slice(1);
-	const rooms = getRooms.map((x) => x.substr(0,4));
+	// Lese vorhandene Zimmergrössen aus (ohne Eintrag "alle Zimmergrössen")
+	const roomSizes = data.filters.rooms.slice(1);
+	const roomSizesLabels = roomSizes.map((x) => x.substr(0,4));
 
+	// Objekt für Ausgabe
 	let roomPriceData = {
-		colors: themes.continuous,
+		colors: colorThemes.continuous,
 		filters: {
-			rooms: rooms,
+			rooms: roomSizesLabels,
 			districts: data.filters.districts
 		},
 	};
 
+	// Loop für die Zusammenstellung der Daten
 	let series = [];
 
-	for(i = 0; i < data.years.length; i++){
+	// Iteration erste Ebene (Jahre)
+	for(const [indexYear, year] of data.years.entries()){
 
-		let serie = [];
+		let seriesDistrict = [];
 
-		for(j = 0; j < data.years[i].districts.length; j++){
+		// Iteration zweite Ebene (Stadtteile)
+		for(const indexDistrict of year.districts.keys()){
 
 			let item = {
 		    	type: 'bar',
@@ -33,18 +38,20 @@ module.exports = async function () {
 		    	}
 		    }
 
-		    const rooms = data.years[i].districts[j].rooms.slice(1);
+		    // Berechne Preis pro Zimmer
+		    const rooms = data.years[indexYear].districts[indexDistrict].rooms.slice(1);
 		    const pricePerRooms = rooms.map((room, index) => {
 		    	return (room / (index + 1)).toFixed(0);
-		    })
+		    });
 
 	    	item.data = pricePerRooms;
-	    	serie.push(item);
+	    	seriesDistrict.push(item);
 	    }
 
-	    series.push(serie);
+	    series.push(seriesDistrict);
 	}
 
 	roomPriceData.series = series;
+
 	return roomPriceData;
 };

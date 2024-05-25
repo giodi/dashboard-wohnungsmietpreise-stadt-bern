@@ -88,10 +88,10 @@ const commonChartOptions = {
 
 const dashboard = {
 	data: {
-		trendDistrict: [{{ districtTrend.series_percent | dump | safe }}, {{ districtTrend.series | dump | safe }}],
-		trendDistrictMinMax: {{ districtTrend.minMax | dump | safe }},
-		trendRoom: [{{ roomTrend.series_percent | dump | safe }}, {{ roomTrend.series | dump | safe }}],
-		trendRoomMinMax: {{ roomTrend.minMax | dump | safe }},
+		trendDistrict: [{{ trendDistrict.seriesPercent | dump | safe }}, {{ trendDistrict.series | dump | safe }}],
+		trendDistrictMinMax: {{ trendDistrict.minMax | dump | safe }},
+		trendRoom: [{{ trendRoom.seriesPercent | dump | safe }}, {{ trendRoom.series | dump | safe }}],
+		trendRoomMinMax: {{ trendRoom.minMax | dump | safe }},
 		roomPriceData: {{ roomPrice.series | dump | safe }},
 		pricePerRoom: {{ pricePerRoom.series | dump | safe }},
 		map: {{ mapData | dump | safe }},
@@ -159,12 +159,12 @@ const dashboard = {
 		roomTrend: {
 			...commonChartOptions.basis,
 			...commonChartOptions.trendAxis,
-			color: {{ roomTrend.colors | dump | safe }},
+			color: {{ trendRoom.colors | dump | safe }},
 		},
 		districtTrend: {
 			...commonChartOptions.basis,
 			...commonChartOptions.trendAxis,
-			color: {{ districtTrend.colors | dump | safe }},
+			color: {{ trendDistrict.colors | dump | safe }},
 		}
 	},
 	checkboxFilters: (area) => {
@@ -185,13 +185,10 @@ const dashboard = {
 		const cboxes = trendRooms.getElementsByTagName('input');
 		const trendRoomsEChart = echarts.init(chart, null, {renderer: 'svg'});
 		const label = ['%','CHF'];
-
-		console.log(dashboard.data.trendRoomMinMax);
-		console.log(filters[0]);
-
+		
 		trendRoomsEChart.setOption(dashboard.options.roomTrend);
 		trendRoomsEChart.setOption({
-			color: {{ roomTrend.colors | dump | safe }},
+			color: {{ trendRoom.colors | dump | safe }},
 			yAxis: {
 				name: label[filters[0]],
 				min: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].min,
@@ -250,9 +247,6 @@ const dashboard = {
 		return trendRoomsEChart;
 	},
 	trendDistrict: _ => {
-
-		console.log();
-
 		const trendDistrict = document.getElementById('trend-district');
 		const chart = trendDistrict.getElementsByClassName('dia')[0];
 		const cboxes = trendDistrict.querySelectorAll('input[type=checkbox]'); 
@@ -263,7 +257,7 @@ const dashboard = {
 		trendDistrictEChart.setOption(dashboard.options.districtTrend);
 		trendDistrictEChart.setOption({
 			series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
-			color: {{ districtTrend.colors | dump | safe }},
+			color: {{ trendDistrict.colors | dump | safe }},
 			legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
 			tooltip: {
 				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
