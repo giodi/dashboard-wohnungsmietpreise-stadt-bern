@@ -401,8 +401,6 @@ const dashboard = {
 		});
 
 		mapEChart.setOption(dashboard.filters.vismapPos())
-
-
 		dashboard.data.mapText(dashboard.data.map[filters[0].value][filters[1].value][1]);
 		mapEChart.setOption(dashboard.data.map[filters[0].value][filters[1].value][0]);
 
