@@ -1,4 +1,4 @@
-# Dashboard zur Visualisierung des Mietpreisindexes der Stadt Bern
+# Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
 
 ## Technische Umsetzung
 Das Dashboard wurde mithilfe des [Static Site Generators](https://en.wikipedia.org/wiki/Static_site_generator) «[11ty](https://11ty.dev)» und der Visualisierungsprogrammbibliothek «[Apache ECharts](https://echarts.apache.org/)» erstellt.
