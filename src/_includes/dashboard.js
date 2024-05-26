@@ -1,4 +1,6 @@
 (()=>{
+
+// Objekt mit den Grundoptionen der Visualisierungen.
 const commonChartOptions = {
 	basis: {
 		animation: false,
@@ -36,7 +38,7 @@ const commonChartOptions = {
 				padding: [0, 0, 10, 0]
 			},
 			type: 'category',
-			data: [{% for year in data_absolut.years %}{{ year.year }},{% endfor %}],
+			data: [{% for year in data.years %}{{ year.year }},{% endfor %}],
 		  	onZero: false,
 		  	axisTick: {
 		  		alignWithLabel: true,
@@ -86,6 +88,7 @@ const commonChartOptions = {
 	}
 }
 
+// Objekt mit Daten und Funktionen für die Bedienelemente und Visualisierungen.
 const dashboard = {
 	data: {
 		trendDistrict: [{{ trendDistrict.seriesPercent | dump | safe }}, {{ trendDistrict.series | dump | safe }}],
@@ -247,8 +250,6 @@ const dashboard = {
 		return trendRoomsEChart;
 	},
 	trendDistrict: _ => {
-
-		console.log(dashboard.data.trendDistrict)
 		const trendDistrict = document.getElementById('trend-district');
 		const chart = trendDistrict.getElementsByClassName('dia')[0];
 		const cboxes = trendDistrict.querySelectorAll('input[type=checkbox]'); 

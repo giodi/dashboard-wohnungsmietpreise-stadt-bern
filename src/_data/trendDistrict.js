@@ -1,4 +1,4 @@
-const data = require("./data_absolut.json");
+const data = require("./data.json");
 const colorThemes = require("./colors.json");
 
 function getMinMax(list){
