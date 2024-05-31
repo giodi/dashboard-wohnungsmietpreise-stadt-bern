@@ -4,7 +4,7 @@ layout: base.njk
 <div id="dashboard">
 	<header>
 		<h1>Wohnungsmietpreise in der Stadt Bern</h1>
-		<button popovertarget="impressum"><span>Impressum</span><span>?</span></button>
+		<button popovertarget="impressum"><span>Impressum & Quellen</span><span>?</span></button>
 	</header>
 	<main>
 		<section>
@@ -78,9 +78,9 @@ layout: base.njk
 					{% set id = "roompricdistricts" %}
 					{% include "select.njk" %}
 					</div>
-					<p class="lead1">Wohnungsmietpreise nach Wohnungsgrösse.</p>						
+					<p class="lead1">Wohnungsmietpreise nach Wohnungsgrösse in CHF.</p>						
 					<div id="roompriceroom"></div>
-					<p class="lead2">Preis pro Zimmer nach Wohnungsgrösse.</p>
+					<p class="lead2">Preis pro Zimmer nach Wohnungsgrösse in CHF.</p>
 					<div id="roompriceperroom"></div>
 				</article>
 			</div>
@@ -88,16 +88,16 @@ layout: base.njk
 	</main>
 </div>
 		<div id="impressum" popover="manual">
-			<h2>Impressum</h2>
+			<h1>Impressum & Quellen</h1>
 			<p>Das Dashboard entstand im Rahmen der Module «Data Visualization» und «Dashboard Design» an der Fach&shy;hoch&shy;schule Graubünden und wurde von <a href="https://lukasstreit.ch">Lukas Streit</a>, <a href="https://ch.linkedin.com/in/martina-stuessi/en">Martina Stüssi</a> und <a href="https://gionathandiani.name">Gionathan Diani</a> entwickelt.</p>
-			<h3>Daten</h3>
+			<h2>Quellen</h2>
 			<p>
 				Die <a href="https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/05pre/05pre-xls#:~:text=T 05.03.050i">Daten</a> stammen aus dem Open Government Portal der Stadt Bern. Die <a href="https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/prd/abteilung-aussenbeziehungen-und-statistik/statistik-stadt-bern/wohnungsmietpreiserhebung">Wohnungs&shy;miet&shy;preis&shy;erhebung</a> wird jährlich im Auftrag des Gemeinde&shy;rats durchgeführt. Erläuterung der Daten und Erhebungs&shy;methoden können der <a href="https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/publikationen/2021-2025/download-2021-2025/2024-03-07-mietpreiserhebung-2023-b.pdf">Begleit&shy;publikation</a> von Statistik Stadt Bern entnommen werden.
 			</p>
 			<p>
 				Die Wohnungs&shy;miet&shy;preise entsprechen den Netto&shy;mietpreisen. Für die Darstellungen der prozentualen Veränderungen in den Diagrammen «Stadtteil» und «Wohnungsgrösse» wurde als Basis das Jahr 2013 (=100) gewählt.
 			</p>
-			<h3>Open Source-Bibliotheken</h3>
+			<h2>Open Source-Bibliotheken</h2>
 			<p>
 				Das Dashboard wurde unter Beihilfe von <a href="https://www.11ty.dev/">11ty</a> (<a href="https://github.com/11ty/eleventy?tab=MIT-1-ov-file#readme">MIT-Lizenz</a>) und <a href="https://echarts.apache.org/">Apache ECharts</a> (<a href="https://github.com/apache/echarts?tab=Apache-2.0-1-ov-file#readme">Apache-2.0 Lizenz</a>) realisiert. Als Schrift&shy;familie wird «<a href="https://rsms.me/inter/">Inter</a>» (<a href="https://raw.githubusercontent.com/rsms/inter/v4.0/LICENSE.txt">SIL Open Font License 1.1</a>) verwendet. Icons stammen von <a href="https://fontawesome.com/">Font Awesome</a> (<a href="https://fontawesome.com/license/free">Font Awesome Free License</a>). Der Programm&shy;quell&shy;code des Dashboards ist im <a href="https://github.com/giodi/wmp-vis">Git-Repository</a> einsehbar.
 			</p>
