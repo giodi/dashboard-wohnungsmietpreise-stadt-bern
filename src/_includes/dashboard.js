@@ -123,6 +123,10 @@ const dashboard = {
 			tooltip: {
 				show: false,
 			},
+			emphasis: {
+				disabled: true,
+			},
+			selectedMode: false,
 			color: {{ pricePerRoom.colors | dump | safe }},
 			legendHoverLink: false,
 			xAxis: {
@@ -373,6 +377,15 @@ const dashboard = {
 		const filters = [dashboard.filters.year, dashboard.filters.mapRoom]
 
 		mapEChart.setOption({
+            tooltip: {
+				show: true,
+				backgroundColor: "#575757",
+				borderColor: "#575757",
+				formatter: '{b}<br>{a}<br>CHF {c}',
+				textStyle: {
+					color: '#fff',
+				},
+			},
 			visualMap: {
 				id: 'vismap',
 		    	orient: 'horizontal',
@@ -394,15 +407,17 @@ const dashboard = {
 	            left: 'right',
 	            top: 'top',
 	            emphasis: {
-	                disabled: true,
+	            	disabled: true
 	            },
-	            selectedMode: false
+	            selectedMode: false,
 		    }]
 		});
 
 		mapEChart.setOption(dashboard.filters.vismapPos())
 		dashboard.data.mapText(dashboard.data.map[filters[0].value][filters[1].value][1]);
 		mapEChart.setOption(dashboard.data.map[filters[0].value][filters[1].value][0]);
+
+
 
 		window.addEventListener('resize', _ => {
 			mapEChart.setOption(dashboard.filters.vismapPos());
