@@ -1,6 +1,6 @@
 # Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
 ## Einleitung
-Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design», unterrichtet durch Michael Burch und Dr. Helena Jambor, ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
+Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design», unterrichtet durch Dr. rer. nat Michael Burch und Dr. rer. nat Helena Jambor, ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
 
 ### Updatefrequenz 
 Der Datensatz wird von der Stadt Bern jährlich veröffentlicht (jeweils im März).
@@ -11,9 +11,37 @@ Die Daten werden im Auftrag des Stadtberner Gemeinderates erhoben. Der Mietpreis
 Im vorliegenden Projekt konzentrieren wir uns auf das Zielpublikum Mieterschaft. Dieses ist die breiteste der obengenannten Gruppen und besonders an der Transparenz interessiert, die dieses Dashboard bieten kann.
 
 ## Datenaufbereitung
-
-Die verarbeiteten Daten wurden auf der Website von Statistik Stadt Bern als Excel-Dateien unter dem Stichwort [«Mietpreiserhebung»](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/publikationen#mietpreiserhebung) bezogen. Zuerst wurden die einzelnen Excel-Dateien aus Excel als csv-Dateien exportiert und weiter mit dem Tool [csv to json](csvjson.com/csv2json) zu json-Daten transformiert. Mit händischer Nacharbeit wurden die einzelnen Json-Elemente zu einer Json-Struktur zusammengeführt und für die programmierende Weiterarbeit möglichst passend bereitgestellt. Die final verwendeten Json-Dateien liegen als `data.json` in unserem [Projekt-Repository](github.com/giodi/wmp-vis/tree/main/src/_data). 
-
+Die verarbeiteten Daten wurden auf der Website von Statistik Stadt Bern als Excel-Dateien unter dem Stichwort [«Mietpreiserhebung»](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/publikationen#mietpreiserhebung) bezogen. Zuerst wurden die einzelnen Excel-Dateien aus Excel als CSV-Dateien exportiert und weiter mit dem Tool [csv to json](csvjson.com/csv2json) zu JSON-Daten transformiert. Mit händischer Nacharbeit wurden die einzelnen JSON-Elemente zu einer JSON-Struktur zusammengeführt und für die programmierende Weiterarbeit möglichst passend bereitgestellt. Die final verwendeten JSON-Datei ist im [Projekt-Repository](github.com/giodi/wmp-vis/tree/main/src/_data) unter `data.json` zu finden. Nachfolgend Annotationen zur Struktur des JSON:
+```javascript
+{
+    // Die Optionen für die Filtermöglichkeiten sind im Objekt "filters" gespeichert.
+    "filters" : {
+        "rooms" : [...],
+        ...
+    },
+    // Der Inhalt im Array "years" korrspondiert mit den Daten
+    // aus der XLS-Datei vom Open Government Portal.
+    // Jedes Tabellenblatt entspricht einem Eintrag im Array.
+    "years":[
+        {
+            "year": 2013,
+            // Array mit Objekt pro Stadtteil
+            "districts": [
+                {    
+                    // Bezeichnung Stadtteil
+                    "district" : "all",
+                    // rooms enthält die Wohnungsmietpreise
+                    // rooms[0] = Durchschnittlicher Wohnungsmietpreis
+                    // rooms[5] = Mietpreis für 5-Zimmer Wohnung
+                    "rooms": [1155, 663, 949, 1151, 1472, 1874]
+                },
+               ...
+            ]
+        }
+        ...
+    ]
+}
+```
 
 ## Technische Umsetzung
 Das Dashboard wurde mithilfe des [Static Site Generators](https://en.wikipedia.org/wiki/Static_site_generator) «[11ty](https://11ty.dev)» und der Visualisierungsprogrammbibliothek «[Apache ECharts](https://echarts.apache.org/)» erstellt. 11ty erlaubt eine sehr flexible Strukturierung von Projekten, weshalb anschliessend Erläuterungen zur Verzeichnisstruktur und einzelner Dateien erfolgt. Im Programmquellcode sind zudem weitere Kommentare zum Code angebracht. Die Erklärungen beschränken sich auf die für die Umsetzung des Dashboards wichtigen Bestandteile. Für weitere grundsätzliche Erklärungen an dieser Stelle ein Verweis auf die Dokumentation von [11ty](https://www.11ty.dev/docs/) und [Apache ECharts](https://echarts.apache.org/handbook/en/get-started/).
