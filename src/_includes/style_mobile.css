@@ -1,4 +1,39 @@
-@media(max-width: 75em){
+@media(min-width: 100em) and (min-height: 50em) {
+
+	:root{
+		--default-border-rad: 0.9375rem;
+		--small-border: 0.3125em;
+		--h1-fs: 1.710625em;
+		--h2-fs: 1.520625em;
+		--h3-fs: 1.35125em;
+		--h4-fs: 1.20125em;
+		--header-options: 1em;
+		--small-txt: .875em;
+	}
+
+}
+
+/* Styles 2K resolution */
+@media(min-width: 125em){
+
+	body{
+		font-size: 120%;
+	}
+
+}
+
+/* Styles 4K resolution */
+@media(min-width: 187em){
+
+	html, 
+	body{
+		font-size: 125%;
+	}
+	
+}
+
+/* Style Tablet */
+@media(max-width: 75em) and (max-aspect-ratio: 16 / 9){
 
 	body{
 		height: auto;
@@ -31,6 +66,9 @@
 
 }
 
+
+
+/* Mobile Style */
 @media(max-width: 47.5em){
 
 	:root{
