@@ -1,6 +1,6 @@
 # Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
 ## Einleitung
-Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design», unterrichtet durch Dr. rer. nat Michael Burch und Dr. rer. nat Helena Jambor, ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
+Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design» an der Fachhochschule Graubünden, unterrichtet durch Dr. rer. nat Michael Burch und Dr. rer. nat Helena Jambor, ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
 
 ### Updatefrequenz 
 Der Datensatz wird von der Stadt Bern jährlich veröffentlicht (jeweils im März).
@@ -56,8 +56,8 @@ Das Verzeichnis `src` enthält alle Quelldateien, welche 11ty zur Kompilierung d
 Im Verzeichnis _data befinden sich Dateien, welche in 11ty «[Global Data Files](https://www.11ty.dev/docs/data-global/)» genannt werden. 
 
 - `data.json`: Entspricht dem Datensatz «T 05.03.050i Durchschnittliche Monatsmietpreise nach Wohnungsgrösse im November 2022 – Stadtteile» als JSON aufbereitet. 
-- `colors.json`: Enthält die Farbschemen, für die Diagramme. 
-- `mapData.js`: Zusammenstellung der für die Choroplethenkarte benötigte Diagramm, anhand der Dateien `data.json` und `colors.json`.
+- `colors.json`: Enthält die Farbschemen für die Diagramme. 
+- `mapData.js`: Zusammenstellung der für die Choroplethenkarte benötigten Diagramme, anhand der Dateien `data.json` und `colors.json`.
 - `pricePerRoom.js`: Zusammenstellung der für das Balkendiagramm «Preis pro Zimmer» benötigten Daten, anhand der Dateien `data.json` und `colors.json`.
 - `roomPrice.js`: Zusammenstellung der für das Balkendiagramm «Preis pro Zimmer» benötigten Daten, anhand der Dateien `data.json` und `colors.json`.
 - `trendDistrict.js`: Zusammenstellung der für das Liniendiagramm «Stadtteil» benötigten Daten, anhand der Dateien `data.json` und `colors.json`.
@@ -74,7 +74,7 @@ Das Verzeichnis `_includes` enthält alle [Templates](https://www.11ty.dev/docs/
 - `dashboard.js`: Programmcode, verantwortlich für die Visualisierungen und Bedienelemente.
 
 ### assets
-Das Verzeichnis enthält alle statischen Dateien, welche für das Dashboard benötigt werden, wie bspw. die Schrift «Inter», die «Apache ECharts» Programmbibliothek oder Bilder.
+Das Verzeichnis `assets` enthält alle statischen Dateien, welche für das Dashboard benötigt werden, wie bspw. die Schrift «Inter», die «Apache ECharts» Programmbibliothek oder Bilder.
 
 ### docs
 Das Verzeichnis `docs` enthält das kompilierte Projekt und dient der Veröffentlichung des Dashboards über [GitHub Pages](https://pages.github.com/).
