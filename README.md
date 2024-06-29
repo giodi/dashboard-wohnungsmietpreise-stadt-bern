@@ -1,6 +1,6 @@
 # Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
 ## Einleitung
-Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design» an der Fachhochschule Graubünden, unterrichtet durch Dr. rer. nat Michael Burch und Dr. rer. nat Helena Jambor, ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
+Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design» an der Fachhochschule Graubünden ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
 
 ### Updatefrequenz 
 Der Datensatz wird von der Stadt Bern jährlich veröffentlicht (jeweils im März).
