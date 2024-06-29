@@ -1,17 +1,24 @@
 # Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
 ## Einleitung
-Im zweiten Teil des Frühlingssemesters 2024 haben Gionathan Diani und Martina Stüssi im Rahmen des Moduls «Dashboard Design» an der Fachhochschule Graubünden ein Dashboard entwickelt. Das zugrundeliegende Mock-Up wurde im Rahmen des Kurses «Data Vizualisation» durch Lukas Streit und Gionathan Diani entwickelt. Das vorliegende Dashboard visualisiert die Mietpreise in der Stadt Bern von den Jahren 2013 bis 2023.
+Wohnungswesen und im Besonderen Mietverhältnisse sind hitzig diskutierte Themen, dies zeigt ein Blick in die Geschäftsdatenbanken der Bundesversammlung und des Berner Stadtparlaments. Darin sind eine Reihe hängiger Geschäfte, mit einschlägigen Titeln wie «Mietzinserhöhung trifft Mieter vierfach. Evaluation der rechtlichen Grundlage für Mietzinserhöhungen» ([Gugger, 2023](https://www.parlament.ch/de/ratsbetrieb/suche-curia-vista/geschaeft?AffairId=20234272)) oder «Für eine soziale Wohnungspolitik – Mietzinsdeckel statt Luxussanierungen» ([Micieli & Joggi, 2024](https://ris.bern.ch/Geschaeft.aspx?obj_guid=cb53a21b596b4e6a8b871825423ecb89)), aufzufinden. Vor diesem Hintergrund wurde ein Dashboard zur Exploration der Stadtberner Wohnungsmietpreise entwickelt. Das Dashboard erlaubt einen Überblick über die Entwicklung der Wohnungsmietpreise von 2013 bis 2023 und ermöglicht eine Segmentierung nach den Merkmalen Jahr, Wohnungsgrösse und Stadtteil. 
 
-### Updatefrequenz 
-Der Datensatz wird von der Stadt Bern jährlich veröffentlicht (jeweils im März).
+Die Entwicklung der Wohnungsmietpreise ist für die Politik interessant und relevant genauso wie für die Bevölkerung und spezifisch in ihren Rollen als Mietende beziehungsweise Vermietende und konkret als Wohnugssuchende. Im vorliegenden Projekt konzentrieren wir uns auf das Zielpublikum Mieterschaft. Dieses ist die breiteste der genannten Gruppen und besonders an der Transparenz interessiert, die dieses Dashboard bieten kann.
 
-### Zielpublikum 
-Die Daten werden im Auftrag des Stadtberner Gemeinderates erhoben. Der Mietpreisindex ist für die Politik interessant und relevant genauso für die Bevölkerung, spezifisch in ihren Rollen als Mietende beziehungsweise Vermietende und konkret als Wohnugssuchende.
+## Daten
+### Datengrundlage
+Als Datengrundlage dient der Datensatz «[T 05.03.050i Durchschnittliche Monatsmietpreise nach Wohnungsgrösse im November 2022 – Stadtteile](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/05pre/05pre-xls#mietpreise)». Dieser schlüsselt [die durchschnittlichen Wohnungsmonatsmietpreise](https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/prd/abteilung-aussenbeziehungen-und-statistik/statistik-stadt-bern/wohnungsmietpreiserhebung) (WMP) der Stadt Bern von 2010 bis 2023, nach Wohnungsgrösse und Stadtteil auf. Er wird über das «[Open Government Data](https://www.bern.ch/open-government-data-ogd/ideen-fuer-dienstleistungen)»-Portal der Stadt Bern im Microsoft Excel Dateiformat bereitgestellt. Die Daten werden jährlich im November erhoben und der aktualisierte Datensatz wird im darauffolgenden März veröffentlicht. Die Erhebung der Mietpreise erfolgt im Auftrag des Stadtberner Gemeinderats und dient der Schaffung von Transparenz auf dem Immobilienmarkt, was gleichermassen dem Interesse von Politik, Mietparteien und Vermieter:innen dient. 
 
-Im vorliegenden Projekt konzentrieren wir uns auf das Zielpublikum Mieterschaft. Dieses ist die breiteste der obengenannten Gruppen und besonders an der Transparenz interessiert, die dieses Dashboard bieten kann.
+Die Excel-Datei «T 05.03.050i» enthält pro Erhebungsjahr ein separates Tabellenblatt. Jedes Tabellenblatt enthält Angaben zu durchschnittlichen Monatsmietpreisen nach Wohnungsgrösse (von eins bis fünf Zimmern und ab 2013 mit Angaben über alle Wohnungsgrössen hinweg) und Quartier (Längasse-Felsenau, Mattenhof-Weissenbühl, Kirchenfeld-Schosshalde, Breitenrain-Lorraine, Bümpliz-Oberbottigen und stadtweit (Stadt Bern)). 
 
-## Datenaufbereitung
-Die verarbeiteten Daten wurden auf der Website von Statistik Stadt Bern als Excel-Dateien unter dem Stichwort [«Mietpreiserhebung»](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/publikationen#mietpreiserhebung) bezogen. Zuerst wurden die einzelnen Excel-Dateien aus Excel als CSV-Dateien exportiert und weiter mit dem Tool [csv to json](csvjson.com/csv2json) zu JSON-Daten transformiert. Mit händischer Nacharbeit wurden die einzelnen JSON-Elemente zu einer JSON-Struktur zusammengeführt und für die programmierende Weiterarbeit möglichst passend bereitgestellt. Die final verwendeten JSON-Datei ist im [Projekt-Repository](github.com/giodi/wmp-vis/tree/main/src/_data) unter `data.json` zu finden. Nachfolgend Annotationen zur Struktur des JSON:
+Zur visuellen Darstellung der Stadtteile der Stadt Bern wurde folgender [Überblick Stadtteile der Stadt Bern](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/stasta) verwendet.
+
+### Datenaufbereitung
+Der Datensatz erforderte eine zusätzliche Aufbereitung, aufgrund festgestellter Inkonsistenzen und der für die maschinelle Verarbeitung ungeeigneten Form. Erst ab dem Jahr 2013 existiert eine zusätzliche Spalte «Insgesamt», welche per 2015 zu «Total» umbenannt wurde. Darin enthalten ist «das mit dem Wohnungsbestand gewichtete Mittel» pro Stadtteil, wobei die Wohnungsbestände als separater Datensatz erhältlich sind. Um den Verhältniswert Kosten pro Zimmer darzustellen, musste dieser zusätzlich errechnet werden. Da fehlenden Informationen zu «Total» beziehungsweise «Insgesamt» nicht errechnet werden konnten, klammert das vorliegende Dashboard die Jahre 2010 - 2012 aus.
+
+Um die Daten weiterverarbeiten zu können wurden sie aus den Excel-Tabellenblättern als CSV-Dateien exportiert und mit dem Tool [csv to json](csvjson.com/csv2json) zu JSON-Daten transformiert. Mit händischer Nacharbeit wurden die JSON-Elemente zu einer JSON-Struktur zusammengeführt und für die programmierende Weiterarbeit möglichst passend bereitgestellt.
+Die gewählte Struktur des JSON-Objekts orientiert sich an der zu grundeliegenden Excel-Datei. Dabei wurden die Tabellentitel (Wohnungsgrössen in Zimmeranzahl) Spaltentitel (Quartiernamen und Stadt Bern) herausgelöst und je in einem Array dargestellt, so können Wiederholungen vermieden werden. Die Daten wurden nach Jahr «year» und nach Quartier «districts» geordnet. Innerhalb der Quartiere finden sich die Angaben zu Konsten nach Zimmergrössen und wohnungsübergreifenden Kosten.
+
+Die final verwendeten JSON-Datei ist im [Projekt-Repository](github.com/giodi/wmp-vis/tree/main/src/_data) unter `data.json` zu finden. Nachfolgend Annotationen zur Struktur des JSON:
 ```javascript
 {
     // Die Optionen für die Filtermöglichkeiten sind im Objekt "filters" gespeichert.
@@ -78,13 +85,3 @@ Das Verzeichnis `assets` enthält alle statischen Dateien, welche für das Dashb
 
 ### docs
 Das Verzeichnis `docs` enthält das kompilierte Projekt und dient der Veröffentlichung des Dashboards über [GitHub Pages](https://pages.github.com/).
-
-### Projektstruktur
-11ty erlaubt eine sehr flexible Strukturierung eines Projekts. Nachfolgend Erläuterungen zur Verzeichnisstruktur und einzelner Dateien. Im Programmquellcode sind zudem weitere Kommentare zum Code angebracht. Die Erklärungen beschränken sich auf für die Umsetzung des Dashboards wichtigen Bestandteile. Für weitere grundsätzliche Erklärungen an dieser Stelle ein Verweis auf die Dokumentation von 11ty und Apache ECharts.
-
-
-## Quellen
-- [Über die Wohnungsmietpreiserhebung](https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/prd/abteilung-aussenbeziehungen-und-statistik/statistik-stadt-bern/wohnungsmietpreiserhebung)
-- [Open Government Data Stadt Bern](https://www.bern.ch/open-government-data-ogd/ideen-fuer-dienstleistungen)
-- [Index der Wohnungsmietpreise der Stadt Bern](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/05pre/05pre-xls#mietpreise)
-- [Überblick Stadtteile der Stadt Bern](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/stasta)
