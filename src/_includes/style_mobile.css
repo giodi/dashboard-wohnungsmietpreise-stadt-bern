@@ -1,18 +1,3 @@
-@media(min-width: 100em) and (min-height: 50em) {
-
-	:root{
-		--default-border-rad: 0.9375rem;
-		--small-border: 0.3125em;
-		--h1-fs: 1.710625em;
-		--h2-fs: 1.520625em;
-		--h3-fs: 1.35125em;
-		--h4-fs: 1.20125em;
-		--header-options: 1em;
-		--small-txt: .875em;
-	}
-
-}
-
 /* Styles 2K resolution */
 @media(min-width: 125em){
 
@@ -32,11 +17,13 @@
 	
 }
 
-/* Style Tablet */
-@media(max-width: 75em) and (max-aspect-ratio: 16 / 9){
-
+@media(min-width: 87.51em) and (max-aspect-ratio: 3 / 2){
 	body{
 		height: auto;
+	}
+
+	#dashboard{
+		max-width: 960px;
 	}
 
 	#map{
@@ -64,27 +51,89 @@
 		grid-template-rows: auto minmax(11em, 1fr);
 	}
 
+	#roompriceroom,
+	#roompriceperroom{
+		min-height: 15em;
+	}
+
+	#roomprice{
+		padding-left: 0;
+	}
+
+	
 }
 
+@media(min-width: 87.51em) and (max-height: 62.5em){
+	body{
+		font-size: 80%;
+	}
+}
 
+/* Style Tablet */
+@media(max-width: 87.5em){
+
+	body{
+		height: auto;
+	}
+
+	#dashboard{
+		max-width: 960px;
+	}
+
+	#map{
+		min-height: 20em;
+	}
+
+	#dashboard>main>section>div{
+		grid-template-rows: auto auto;
+		grid-template-columns: minmax(0, 1fr);
+		grid-row-gap: 2em;
+	}
+
+	#map,
+	#trend-district{
+		padding-right: 0;
+		border: unset;
+	}
+
+	#trend-rooms{
+		padding-left: 0;
+	}
+
+	#trend-district,
+	#trend-rooms{
+		grid-template-rows: auto minmax(11em, 1fr);
+	}
+
+	#roompriceroom,
+	#roompriceperroom{
+		min-height: 15em;
+	}
+
+	#roomprice{
+		padding-left: 0;
+	}
+
+}
 
 /* Mobile Style */
 @media(max-width: 47.5em){
-
+	
 	:root{
-		--h1-fs: 1.25em;
+		--h1-fs: 1.125em;
 		--h2-fs: 1.125em;
-		--h3-fs: 1em;
-		--h4-fs: .875em;
+		--h3-fs: 1.125em;
+		--h4-fs: 1em;
 		--default-border-rad: 0.625em;
+		--small-txt: 1em;
 	}
-
+	
 	h1{
 		line-height: 1.2;
 	}
 
 	#dashboard{
-		padding-bottom: 3em;
+		padding-bottom: 3.5em;
 	}
 
 	#dashboard>header{
@@ -92,7 +141,7 @@
 		color: #fff;
 		position: fixed;
 		width: 100%;
-		height: 4em ;
+		height: 3em ;
 		z-index: 99;
 		top: 0;
 		box-shadow: 0 0 .652em rgba(0,0,0,.2);
@@ -110,7 +159,7 @@
 	#dashboard>header>button{
 		border-radius: 50%;
 		box-shadow: .0625em .0625em 10px rgba(0, 0, 0, 0.1);
-		border: .125em solid #fff;
+		border: 1px solid rgba(0,0,0,.1);
 		width: 3em;
 		height: 3em;
 		text-align: center;
@@ -129,6 +178,7 @@
 
 	button>span:last-child{
 		display: inline;
+		font-size: 1.5em;
 	}
 	
 	button>span:first-child{
@@ -139,7 +189,7 @@
 		display: unset;
 		position: sticky;
 		z-index: 2;
-		top: 4em;
+		top: 3em;
 		background: #fff;
 		padding: 1em;
 		box-shadow: .0625em .0625em 10px rgba(0, 0, 0, 0.1);
@@ -155,7 +205,7 @@
 
 	#dashboard > main{
 		border-radius: 0;
-		margin-top: 4em;
+		margin-top: 3em;
 	}
 
 	#dashboard > main > section > header > select,
@@ -167,8 +217,15 @@
 		padding: 0;
 	}
 
+	#trend-district p, 
+	#trend-rooms p{
+		margin-top: unset;
+		padding: unset;
+	}
+
 	#dashboard > main{
 		padding: 0;
+		grid-template-rows: auto auto;
 	}
 
 	#dashboard > main > section > div{
@@ -185,8 +242,10 @@
 
 	#trend-district .filter, 
 	#trend-rooms .filter{
+		margin-top: .5em;
 		justify-self: start;
 	}
+
 
 	#map{
 		grid-template-columns: 1fr;
@@ -223,8 +282,13 @@
 		margin-top: 1em;
 	}
 
-	#roomprice p{
+	#roomprice .lead1,
+	#roomprice .lead2{
 		margin-top: 1em;
+	}
+
+	.legend{
+		margin-top: .5em;
 	}
 
 	.legend ul{

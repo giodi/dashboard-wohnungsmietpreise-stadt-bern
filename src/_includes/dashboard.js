@@ -2,11 +2,44 @@
 
 // Objekt mit den Grundoptionen der Visualisierungen.
 const commonChartOptions = {
+	setFontSizes: _ => {
+
+		// Einstellung der Schriftgrösse je nach Viewport.
+		let fS = 16;
+
+		switch(true){
+			case window.innerWidth > 2992:
+				fS = 25;
+				break;
+			case window.innerWidth > 2000:
+				fS = 19.2;
+				break;
+			case window.innerWidth > 1400 && window.innerWidth / window.innerHeight >= 1.5:
+				fS = 16;
+				break;
+			case window.innerWidth > 1400 && window.innerHeight < 1000:
+				fS = 12
+				break;
+		}
+
+		commonChartOptions.trendAxis.yAxis.axisLabel.fontSize = fS;
+		commonChartOptions.trendAxis.xAxis.axisLabel.fontSize = fS;
+		commonChartOptions.basis.series.label.fontSize = fS;
+
+
+	},
+	responsiveOptions: {
+		tooltip: {
+			textStyle: {
+				fontSize: 16
+			}
+		}
+	},
 	basis: {
 		animation: false,
 		grid: {
 			left: 0,
-			right: 0,
+			right: 5,
 			top: 10,
 			bottom: 0,
 			containLabel: true,
@@ -19,12 +52,19 @@ const commonChartOptions = {
 			formatter: '{a}<br>{b}<br>{c}',
 			textStyle: {
 				color: '#fff',
+				fontSize: 16,
 			},
 			axisPointer: {
 				type: 'line',
 				snap: true
 			}
-		}
+		},
+		series: {
+			type: 'bar',
+			label: {
+				fontSize: 16,
+			}
+		},
 	},
 	trendAxis: {
 		xAxis: {
@@ -51,7 +91,7 @@ const commonChartOptions = {
 		    	},
 		    },
 		    axisLabel: {
-		    	fontSize: 14,
+		    	fontSize: 16,
 		    	fontFamily: 'Inter, sans-serif',
 		    },
 		},
@@ -80,7 +120,7 @@ const commonChartOptions = {
 		    	},
 		    },
 		    axisLabel: {
-		    	fontSize: 14,
+		    	fontSize: 16,
 		    	fontFamily: 'Inter, sans-serif',
 		    	formatter: (val) => {return val.toLocaleString('de-CH')},
 		    },
@@ -99,7 +139,7 @@ const dashboard = {
 		pricePerRoom: {{ pricePerRoom.series | dump | safe }},
 		map: {{ mapData | dump | safe }},
 		mapText: (txt) => {
-			document.getElementById('desc').innerHTML = `Der Stadtteil «${txt[0]}» hat mit CHF&nbsp;${txt[1]} die tiefsten, der Stadtteil «${txt[2]}» mit CHF&nbsp;${txt[3]} die höchsten Mietpreise. Das entspricht einem Unterschied von ${txt[4]} Prozent.`
+			document.getElementById('desc').innerHTML = `Der Stadtteil «${txt[0]}» hat mit CHF&nbsp;${txt[1]} die tiefsten, der Stadtteil «${txt[2]}» mit CHF&nbsp;${txt[3]} die höchsten Miet&shy;preise. Das entspricht einem Unterschied von ${txt[4]} Prozent.`
 		}
 	},
 	filters: {
@@ -185,6 +225,15 @@ const dashboard = {
 
 		return selection;
 	},
+	trendTooltip: (params, filter) => {
+		// Tooltip Inhalt für Trendcharts
+		if(filter == '%'){
+			let val = params.value > 0 ? '+'+params.value : params.value;
+			return `${params.seriesName}<br />${params.name}<br />${val} %`
+		}else{
+			return `${params.seriesName}<br>${params.name}<br>CHF ${params.value}`
+		}
+	},
 	trendRooms: _ => {
 		const trendRooms = document.getElementById('trend-rooms');
 		const chart = trendRooms.getElementsByClassName('dia')[0];
@@ -201,11 +250,13 @@ const dashboard = {
 				min: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].min,
 				max: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].max,
 				axisLabel: {
-					formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+					formatter: (value) => {return filters[0] ? value : value > 0 ? '+'+value : value < 0 ? value : '100'}
 				}
 			},
 			tooltip: {
-				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+				formatter: (params) => {
+					return dashboard.trendTooltip(params, label[filters[0]])
+				}
 			},
 			series: dashboard.data.trendRoom[filters[0]][filters[1].value],
 			legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
@@ -217,14 +268,16 @@ const dashboard = {
 				series: dashboard.data.trendRoom[filters[0]][filters[1].value],
 				legend: {show: false, selected: dashboard.checkboxFilters(trendRooms)},
 				tooltip: {
-					formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+					formatter: (params) => {
+						return dashboard.trendTooltip(params, label[filters[0]])
+					}
 				},
 				yAxis: {
 					name: label[filters[0]],
 					min: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].min,
 					max: dashboard.data.trendRoomMinMax[filters[0]][filters[1].value].max,
 					axisLabel: {
-						formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+						formatter: (value) => {return filters[0] ? value : value > 0 ? '+'+value : value < 0 ? value : '100'}
 					}
 				},
 			});
@@ -267,14 +320,16 @@ const dashboard = {
 			color: {{ trendDistrict.colors | dump | safe }},
 			legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
 			tooltip: {
-				formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+				formatter: (params) => {
+					return dashboard.trendTooltip(params, label[filters[0]])
+				}
 			},
 			yAxis: {
 				name: label[filters[0]],
 				min: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].min,
 				max: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].max,
 				axisLabel: {
-					formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+					formatter: (value) => {return filters[0] ? value : value > 0 ? '+'+value : value < 0 ? value : '100'}
 				}
 			},
 		});
@@ -285,14 +340,16 @@ const dashboard = {
 				series: dashboard.data.trendDistrict[filters[0]][filters[1].value],
 				legend: {show: false, selected: dashboard.checkboxFilters(trendDistrict)},
 				tooltip: {
-					formatter: '{a}<br>{b}<br>{c} '+label[filters[0]],
+					formatter: (params) => {
+						return dashboard.trendTooltip(params, label[filters[0]])
+					}
 				},
 				yAxis: {
 					name: label[filters[0]],
 					min: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].min,
 					max: dashboard.data.trendDistrictMinMax[filters[0]][filters[1].value].max,
 						axisLabel: {
-						formatter: (value) => {return filters[0] ?  value : value > 0 ? '+'+value : value}
+						formatter: (value) => {return filters[0] ? value : value > 0 ? '+'+value : value < 0 ? value : '100'}
 					}
 				},
 			});
@@ -436,17 +493,27 @@ const dashboard = {
 		return mapEChart;
 	},
 	init: _ => {
+
+		commonChartOptions.setFontSizes();
 		let trendDistrictChart = dashboard.trendDistrict();
 		let trendRoomChart = dashboard.trendRooms();
 		let roomPriceChart = dashboard.roomPrice();
 		let districtMap = dashboard.districtMap();
 
 		window.addEventListener('resize', _ => {
+			
+			commonChartOptions.setFontSizes();
+
+			trendDistrictChart.setOption({yAxis: {axisLabel: {fontSize: fS}}});
+			
 			trendDistrictChart.resize();
 			trendRoomChart.resize();
 			roomPriceChart[0].resize();
 			roomPriceChart[1].resize();
+			
 			districtMap.resize();
+
+
 		});
 	}
 }

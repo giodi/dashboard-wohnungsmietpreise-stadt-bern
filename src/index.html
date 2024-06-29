@@ -19,7 +19,7 @@ layout: base.njk
 			<div>
 				<article id="trend-district">
 					<h3>Stadtteil</h3>
-					<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Stadtteil.<br />Basisjahr {{ data.years[0].year }}</p>
+					<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Stadtteil. <span>Basisjahr {{ data.years[0].year }}.</span></p>
 					<div class="filter">
 						{% set options = trendDistrict.filters.rooms %}
 						{% set id = "district-trend-rooms" %}
@@ -40,7 +40,7 @@ layout: base.njk
 						{% set id = "rooms-trend-district" %}
 						{% include "select.njk" %}
 					</div>
-					<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse.<br>Basisjahr {{ data.years[0].year }}</p>
+					<p>Entwicklung Wohnungs&shy;miet&shy;preise nach Wohnungs&shy;grösse. <span>Basisjahr {{ data.years[0].year }}.</span></p>
 					<div class="legend">
 						<h4>Wohnungsgrössen</h4>
 						{% set options = trendRoom.filters.rooms %}
@@ -89,7 +89,7 @@ layout: base.njk
 </div>
 		<div id="impressum" popover="manual">
 			<h1>Impressum & Quellen</h1>
-			<p>Das Dashboard entstand im Rahmen der Module «Data Visualization» und «Dashboard Design» an der Fach&shy;hoch&shy;schule Graubünden und wurde von <a href="https://lukasstreit.ch">Lukas Streit</a>, <a href="https://ch.linkedin.com/in/martina-stuessi/en">Martina Stüssi</a> und <a href="https://gionathandiani.name">Gionathan Diani</a> entwickelt.</p>
+			<p>Das Dashboard entstand im Rahmen der Module «Data Visualization» und «Dashboard Design» an der Fach&shy;hoch&shy;schule Graubünden und wurde von <a href="https://lukasstreit.ch">Lukas Streit</a>, <a href="https://ch.linkedin.com/in/martina-stuessi/en">Martina Stüssi</a> und <a href="https://gionathandiani.name">Gionathan Diani</a> im Frühlingssemester 2024 entwickelt.</p>
 			<h2>Quellen</h2>
 			<p>
 				Die <a href="https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/05pre/05pre-xls#:~:text=T 05.03.050i">Daten</a> stammen aus dem Open Government Portal der Stadt Bern. Die <a href="https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/prd/abteilung-aussenbeziehungen-und-statistik/statistik-stadt-bern/wohnungsmietpreiserhebung">Wohnungs&shy;miet&shy;preis&shy;erhebung</a> wird jährlich im Auftrag des Gemeinde&shy;rats durchgeführt. Erläuterung der Daten und Erhebungs&shy;methoden können der <a href="https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/publikationen/2021-2025/download-2021-2025/2024-03-07-mietpreiserhebung-2023-b.pdf">Begleit&shy;publikation</a> von Statistik Stadt Bern entnommen werden.
@@ -103,7 +103,7 @@ layout: base.njk
 			</p>
 			<p class="footnote">Zuletzt aktualisiert am {% datenow "dd.mm.YYYY" %}</p>
 			<button class="close" popovertarget="impressum" popovertargetaction="hide">
-		    	<span aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path fill="#575757" d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg></span>
+		    	<span aria-hidden="true"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><svg viewBox="0 0 321 321" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M310.675 54.675C323.175 42.175 323.175 21.875 310.675 9.375C298.175 -3.125 277.875 -3.125 265.375 9.375L160.075 114.775L54.675 9.475C42.175 -3.025 21.875 -3.025 9.375 9.475C-3.125 21.975 -3.125 42.275 9.375 54.775L114.775 160.075L9.475 265.475C-3.025 277.975 -3.025 298.275 9.475 310.775C21.975 323.275 42.275 323.275 54.775 310.775L160.075 205.375L265.475 310.675C277.975 323.175 298.275 323.175 310.775 310.675C323.275 298.175 323.275 277.875 310.775 265.375L205.375 160.075L310.675 54.675Z" fill="#575757"/></svg></span>
 		   		<span class="sr-only">Close</span>
 		  </button>
 		</div>

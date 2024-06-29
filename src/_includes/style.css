@@ -18,7 +18,7 @@
 	--h3-fs: 1.20125em;
 	--h4-fs: 1.068125em;
 	--header-options: 1em;
-	--small-txt: .75em;
+	--small-txt: 1em;
 }
 
 
@@ -54,6 +54,7 @@ body{
 	height: 100vh;
 	grid-template-rows: minmax(0, 1fr);
 	padding: .75em 1em;
+	justify-items: center;
 }
 
 select {
@@ -63,6 +64,7 @@ select {
   border-radius: var(--small-border);
   padding: .5em 2em .5em .4em;
   width: auto;
+  font-family: Inter, sans-serif;
   font-size: var(--small-txt);
   font-weight: 500;
   cursor: inherit;
@@ -76,7 +78,7 @@ select {
 
 select:hover,
 select:focus{
-	background-color: var(--fschema-el-1);
+	background-color: var(--fschema-el-3);
 }
 
 a{
@@ -147,27 +149,29 @@ button{
 	padding: 1em;
 	border-radius: var(--small-border);
 	font-weight: 600;
+	font-family: Inter, sans-serif;
 }
 
 button.close{
 	position: absolute;
-	top: .5em;
-	right: .5em;
-	border-radius: 50%;
+	top: .75em;
+	right: .75em;
 	width: 1.5em;
 	height: 1.5em;
+	border-radius: 50%;
 	display: inline-flex;
-	justify-content: center;
-	align-items: center;
+  justify-content: center;
+  align-items: center;
 }
 
 button.close svg{
-	width: 1em;
+	width: .75em;
+	height: .75em;
 }
 
 button:hover,
 button:focus{
-	background-color: var(--fschema-el-1);
+	background-color: var(--fschema-el-3);
 	cursor: pointer;
 }
 
@@ -225,7 +229,7 @@ label.toggle input[type=checkbox] ~ .option:last-child{
 
 label.toggle input[type=checkbox] ~ .option:last-child:hover,
 label.toggle input[type=checkbox] ~ .option:last-child:focus{
-	background: var(--fschema-el-1);
+	background: var(--fschema-el-3);
 }
 
 label.toggle input[type=checkbox]:checked ~ .option{
@@ -235,7 +239,7 @@ label.toggle input[type=checkbox]:checked ~ .option{
 
 label.toggle input[type=checkbox]:checked ~ .option:hover,
 label.toggle input[type=checkbox]:checked ~ .option:focus{
-	background: var(--fschema-el-1);
+	background: var(--fschema-el-3);
 }
 
 label.toggle input[type=checkbox]:checked ~ .option:last-child{
