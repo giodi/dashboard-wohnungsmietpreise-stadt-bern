@@ -85,3 +85,15 @@ Das Verzeichnis `assets` enthält alle statischen Dateien, welche für das Dashb
 
 ### docs
 Das Verzeichnis `docs` enthält das kompilierte Projekt und dient der Veröffentlichung des Dashboards über [GitHub Pages](https://pages.github.com/).
+
+## Mögliche Weiterentwicklung
+
+Eine Erweiterung des Dashboards auf Wohnungsmietpreisangaben aus anderen Städten der Schweiz wäre grundsätzlich denkbar. Grundlegende Abklärungen in die Datenlage haben aber ergeben, dass die Datenlage der Stadt Bern im Vergleich zu anderen Städten sehr reichhaltig ist. Bei einer Anpassung auf einen andere Stadt müsste man auf viele Daten verzichten. 
+
+Exemplarisch sei die Situation an zwei Beispielen gezeigt:
+- Die [Stadt Zürich](https://www.stadt-zuerich.ch/prd/de/index/statistik/publikationen-angebote/publikationen/webartikel/2022-11-03_Mietpreise-in-der-Stadt-Zuerich.html) hat einzig 2022 eine Mietpreiserhebung durchgeführt, davor wurde die letzte Mietpreiserhebung 2006 durchgeführt, bei dieser Datensituation macht eine jährliche Darstellung keinen Sinn.
+- Der Stadt-Kanton (Basel-Stadt)[https://www.statistik.bs.ch/zahlen/tabellen/9-bau-wohnungswesen/mietpreise.html] erhebt die Mietpreise zwar regelmässig und stellt eine breite Palette an Daten zur Mietsituation bereit, diese sind trotzdem anders strukturiert als die Berner Daten. So gibt es im Datensatz «T09.3.11 - nach Zimmerzahl und Bauperiode» jährliche Daten nach Zimmerzahl und Jahr, der Datensatz «T09.3.21 - nach Zimmerzahl und Wohnviertel» mit geografisch lokalisierte Daten zu Zimmerzahl und Jahr wird aber nur in Vierjahresperioden (2010-2014, 2018-2022) und mit Lücken publiziert.
+
+Möglicherweise vergleichbar sind einzig die Daten
+- des Kantons Genf im Datensatz «[T 05.04.2.01 - Loyer mensuel moyen selon le nombre de pièces et diverses caractéristiques, depuis 2006](https://statistique.ge.ch/domaines/05/05_04/tableaux.asp#5)» mit Angaben zu Quartier, Jahr und Anzahl der Zimmer.
+
