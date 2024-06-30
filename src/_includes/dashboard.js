@@ -520,8 +520,14 @@ const dashboard = {
 
 		window.addEventListener('resize', _ => {
 			
+			commonChartOptions.setFontSizes();
+
 			setTimeout(() => {
-				window.location.reload();
+				trendDistrictChart.resize();
+				trendRoomChart.resize();
+				roomPriceChart[0].resize();
+				roomPriceChart[1].resize();
+				districtMap.resize();
 			}, '1000')
 			
 
