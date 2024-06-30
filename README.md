@@ -1,5 +1,4 @@
-Bericht von Gionathan Diani und Martina Stüssi, 29.06.2024
-
+Bericht von Gionathan Diani und Martina Stüssi, 29.06.2024  
 Dashboard Design, Fachhochschule Graubünden
 
 # Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
