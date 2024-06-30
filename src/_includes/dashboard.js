@@ -14,7 +14,7 @@ const commonChartOptions = {
 			case window.innerWidth > 2000:
 				fS = 19.2;
 				break;
-			case window.innerWidth > 1400 && window.innerWidth / window.innerHeight >= 1.5:
+			case window.innerWidth > 1400 && window.innerHeight > 1000 && window.innerWidth / window.innerHeight >= 1.5:
 				fS = 16;
 				break;
 			case window.innerWidth > 1400 && window.innerHeight < 1000:
@@ -23,15 +23,28 @@ const commonChartOptions = {
 		}
 
 		commonChartOptions.trendAxis.yAxis.axisLabel.fontSize = fS;
+		commonChartOptions.trendAxis.xAxis.nameTextStyle.fontSize = fS;
+		commonChartOptions.trendAxis.yAxis.nameTextStyle.fontSize = fS;
 		commonChartOptions.trendAxis.xAxis.axisLabel.fontSize = fS;
 		commonChartOptions.basis.series.label.fontSize = fS;
-
+		commonChartOptions.basis.tooltip.textStyle.fontSize = fS;
+		commonChartOptions.responsiveOptions.districtMap.visualMap.textStyle.fontSize = fS;
+		dashboard.options.bar.yAxis.axisLabel.fontSize = fS;
 
 	},
 	responsiveOptions: {
-		tooltip: {
-			textStyle: {
-				fontSize: 16
+		districtMap: {
+			visualMap: {
+		      	textStyle: {
+		      		fontSize: 16,
+		      	},
+		    },
+		},
+		bar: {
+			yAxis: {
+				axisLabel: {
+					fontSize: 16,
+				}
 			}
 		}
 	},
@@ -75,7 +88,8 @@ const commonChartOptions = {
 			nameTextStyle: {
 				align: 'right',
 				verticalAlign: 'bottom',
-				padding: [0, 0, 10, 0]
+				padding: [0, 0, 10, 0],
+				fontSize: 16,
 			},
 			type: 'category',
 			data: [{% for year in data.years %}{{ year.year }},{% endfor %}],
@@ -102,7 +116,8 @@ const commonChartOptions = {
 		  	nameTextStyle: {
 				align: 'left',
 		 		verticalAlign: 'top',
-				padding: [0, 0, 0, 10]
+				padding: [0, 0, 0, 10],
+				fontSize: 16
 			},
 			type: 'value',
 			scale: true,
@@ -127,6 +142,8 @@ const commonChartOptions = {
 		},
 	}
 }
+
+
 
 // Objekt mit Daten und Funktionen für die Bedienelemente und Visualisierungen.
 const dashboard = {
@@ -197,10 +214,11 @@ const dashboard = {
 		      		show: false
 		    	},
 		    	axisLabel: {
+		    		fontSize: 16,
 		    		inside: true,
 		    		color: '#fff',
 		    		fontWeight: '700',
-		    	}
+		    	},
 		  	},
 		},
 		roomTrend: {
@@ -434,6 +452,7 @@ const dashboard = {
 		const filters = [dashboard.filters.year, dashboard.filters.mapRoom]
 
 		mapEChart.setOption({
+			...commonChartOptions.responsiveOptions.districtMap.visualMap,
             tooltip: {
 				show: true,
 				backgroundColor: "#575757",
@@ -449,7 +468,6 @@ const dashboard = {
 		      	realtime: true,
 		      	calculable: false,
 		      	textStyle: {
-		      		fontSize: 14,
 		      		color: '#575757',
 		      	},
 		      	indicatorStyle: {
@@ -502,16 +520,10 @@ const dashboard = {
 
 		window.addEventListener('resize', _ => {
 			
-			commonChartOptions.setFontSizes();
-
-			trendDistrictChart.setOption({yAxis: {axisLabel: {fontSize: fS}}});
+			setTimeout(() => {
+				window.location.reload();
+			}, '1000')
 			
-			trendDistrictChart.resize();
-			trendRoomChart.resize();
-			roomPriceChart[0].resize();
-			roomPriceChart[1].resize();
-			
-			districtMap.resize();
 
 
 		});
