@@ -13,15 +13,14 @@ Die Entwicklung der Wohnungsmietpreise ist für die Politik interessant und rele
 ### Datengrundlage
 Als Datengrundlage dient der Datensatz «[T 05.03.050i Durchschnittliche Monatsmietpreise nach Wohnungsgrösse im November 2022 – Stadtteile](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/05pre/05pre-xls#mietpreise)». Dieser schlüsselt [die durchschnittlichen Wohnungsmonatsmietpreise](https://www.bern.ch/politik-und-verwaltung/stadtverwaltung/prd/abteilung-aussenbeziehungen-und-statistik/statistik-stadt-bern/wohnungsmietpreiserhebung) (WMP) der Stadt Bern von 2010 bis 2023, nach Wohnungsgrösse und Stadtteil auf. Er wird über das «[Open Government Data](https://www.bern.ch/open-government-data-ogd/ideen-fuer-dienstleistungen)»-Portal der Stadt Bern im Microsoft Excel Dateiformat bereitgestellt. Die Daten werden jährlich im November erhoben und der aktualisierte Datensatz wird im darauffolgenden März veröffentlicht. Die Erhebung der Mietpreise erfolgt im Auftrag des Stadtberner Gemeinderats und dient der Schaffung von Transparenz auf dem Immobilienmarkt, was gleichermassen dem Interesse von Politik, Mietparteien und Vermieter:innen dient. 
 
-Die Excel-Datei «T 05.03.050i» enthält pro Erhebungsjahr ein separates Tabellenblatt. Jedes Tabellenblatt enthält Angaben zu durchschnittlichen Monatsmietpreisen nach Wohnungsgrösse (von eins bis fünf Zimmern und ab 2013 mit Angaben über alle Wohnungsgrössen hinweg) und Quartier (Längasse-Felsenau, Mattenhof-Weissenbühl, Kirchenfeld-Schosshalde, Breitenrain-Lorraine, Bümpliz-Oberbottigen und stadtweit (Stadt Bern)). 
+Die Excel-Datei «T 05.03.050i» enthält pro Erhebungsjahr ein separates Tabellenblatt. Jedes Tabellenblatt enthält Angaben zu durchschnittlichen Monatsmietpreisen nach Wohnungsgrösse (von eins bis fünf Zimmern und ab 2013 mit Angaben über alle Wohnungsgrössen hinweg) und Quartier (Längasse-Felsenau, Mattenhof-Weissenbühl, Kirchenfeld-Schosshalde, Breitenrain-Lorraine, Bümpliz-Oberbottigen und stadtweit [Stadt Bern]). 
 
 Zur visuellen Darstellung der Stadtteile der Stadt Bern wurde folgender [Überblick Stadtteile der Stadt Bern](https://www.bern.ch/themen/stadt-recht-und-politik/bern-in-zahlen/katost/stasta) verwendet.
 
 ### Datenaufbereitung
 Der Datensatz erforderte eine zusätzliche Aufbereitung, aufgrund festgestellter Inkonsistenzen und der für die maschinelle Verarbeitung ungeeigneten Form. Erst ab dem Jahr 2013 existiert eine zusätzliche Spalte «Insgesamt», welche per 2015 zu «Total» umbenannt wurde. Darin enthalten ist «das mit dem Wohnungsbestand gewichtete Mittel» pro Stadtteil, wobei die Wohnungsbestände als separater Datensatz erhältlich sind. Um den Verhältniswert Kosten pro Zimmer darzustellen, musste dieser zusätzlich errechnet werden. Da fehlenden Informationen zu «Total» beziehungsweise «Insgesamt» nicht errechnet werden konnten, klammert das vorliegende Dashboard die Jahre 2010 - 2012 aus.
 
-Um die Daten weiterverarbeiten zu können wurden sie aus den Excel-Tabellenblättern als CSV-Dateien exportiert und mit dem Tool [csv to json](csvjson.com/csv2json) zu JSON-Daten transformiert. Mit händischer Nacharbeit wurden die JSON-Elemente zu einer JSON-Struktur zusammengeführt und für die programmierende Weiterarbeit möglichst passend bereitgestellt.
-Die gewählte Struktur des JSON-Objekts orientiert sich an der zu grundeliegenden Excel-Datei. Dabei wurden die Tabellentitel (Wohnungsgrössen in Zimmeranzahl) Spaltentitel (Quartiernamen und Stadt Bern) herausgelöst und je in einem Array dargestellt, so können Wiederholungen vermieden werden. Die Daten wurden nach Jahr «year» und nach Quartier «districts» geordnet. Innerhalb der Quartiere finden sich die Angaben zu Konsten nach Zimmergrössen und wohnungsübergreifenden Kosten.
+Um die Daten weiterverarbeiten zu können wurden sie aus den Excel-Tabellenblättern als CSV-Dateien exportiert und mit dem Tool [csv to json](csvjson.com/csv2json) zu JSON-Daten transformiert. Mit händischer Nacharbeit wurden die JSON-Elemente zu einer JSON-Struktur zusammengeführt und für die programmierende Weiterarbeit möglichst passend bereitgestellt. Die gewählte Struktur des JSON-Objekts orientiert sich an der zu grundeliegenden Excel-Datei. Dabei wurden die Tabellentitel (Wohnungsgrössen in Zimmeranzahl) Spaltentitel (Quartiernamen und Stadt Bern) herausgelöst und je in einem Array dargestellt, so können Wiederholungen vermieden werden. Die Daten wurden nach Jahr «year» und nach Quartier «districts» geordnet. Innerhalb der Quartiere finden sich die Angaben zu Kosten nach Zimmergrössen und wohnungsübergreifenden Kosten.
 
 Die final verwendeten JSON-Datei ist im [Projekt-Repository](github.com/giodi/wmp-vis/tree/main/src/_data) unter `data.json` zu finden. Nachfolgend Annotationen zur Struktur des JSON:
 ```javascript
@@ -44,7 +43,7 @@ Die final verwendeten JSON-Datei ist im [Projekt-Repository](github.com/giodi/wm
                     "district" : "all",
                     // rooms enthält die Wohnungsmietpreise
                     // rooms[0] = Durchschnittlicher Wohnungsmietpreis
-                    // rooms[5] = Mietpreis für 5-Zimmer Wohnung
+                    // rooms[1-5] = Mietpreis für 1- bis 5-Zimmer Wohnung
                     "rooms": [1155, 663, 949, 1151, 1472, 1874]
                 },
                ...
