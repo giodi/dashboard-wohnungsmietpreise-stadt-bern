@@ -2,8 +2,8 @@ Bericht von Gionathan Diani und Martina Stüssi, 30.06.2024
 Dashboard Design, Fachhochschule Graubünden
 
 # Dashboard Entwicklung Wohnungsmietpreise der Stadt Bern
-* Link zum Dashboard: [https://giodi.github.io/wmp-vis/](https://giodi.github.io/wmp-vis/)
-* Link zum github-Repository: [https://github.com/giodi/wmp-vis](https://github.com/giodi/wmp-vis)
+* Link zum Dashboard: https://giodi.github.io/dashboard-wohnungsmietpreise-stadt-bern/
+* Link zum Repository: https://github.com/dashboard-wohnungsmietpreise-stadt-bern/
 ## Einleitung
 Wohnungswesen und im Besonderen Mietverhältnisse sind hitzig diskutierte Themen, dies zeigt ein Blick in die Geschäftsdatenbanken der Bundesversammlung und des Berner Stadtparlaments. Darin sind eine Reihe hängiger Geschäfte, mit einschlägigen Titeln wie «Mietzinserhöhung trifft Mieter vierfach. Evaluation der rechtlichen Grundlage für Mietzinserhöhungen» ([Gugger, 2023](https://www.parlament.ch/de/ratsbetrieb/suche-curia-vista/geschaeft?AffairId=20234272)) oder «Für eine soziale Wohnungspolitik – Mietzinsdeckel statt Luxussanierungen» ([Micieli & Joggi, 2024](https://ris.bern.ch/Geschaeft.aspx?obj_guid=cb53a21b596b4e6a8b871825423ecb89)), aufzufinden. Vor diesem Hintergrund wurde ein Dashboard zur Exploration der Stadtberner Wohnungsmietpreise entwickelt. Das Dashboard erlaubt einen Überblick über die Entwicklung der Wohnungsmietpreise von 2013 bis 2023 und ermöglicht eine Segmentierung nach den Merkmalen Jahr, Wohnungsgrösse und Stadtteil. 
 
